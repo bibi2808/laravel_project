@@ -17,14 +17,12 @@ use Illuminate\Support\Facades\Route;
 
 $prefixAdmin = config("zvn.url.prefix_admin"); // admin
 
-
 Route::prefix($prefixAdmin)->group(function () {
 
     $prefix = "dashboard";
     $controllerName = "dashboard";
 
     Route::prefix($prefix)->group(function () use($controllerName){
-
         Route::get('/', [DashboardController::class, 'index'])->name($controllerName);
     });
     
@@ -40,5 +38,9 @@ Route::prefix($prefixAdmin)->group(function () {
         Route::get('/', [SliderController::class, 'index'])->name($controllerName);
     });
     
+});
+
+Route::get('/', function () {
+    return view('welcome');
 });
 

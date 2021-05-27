@@ -25,7 +25,7 @@
                             $description        = $value['description'];
                             $link               = $value['link'];
                             $thumb              = Template::showItemThumb($controllerName, $value['thumb'], $value['name']);
-                            $status             = Template::changeStatus($controllerName, $id, $value['status']); // $controllerName from Controller
+                            $status             = Template::showItemStatus($controllerName, $id, $value['status']); // $controllerName from Controller
                             $createdHistory     = Template::modeHistory($value['created_by'], $value['created']);
                             $modifiedHistory    = Template::modeHistory($value['modified_by'], $value['modified']);
                             $showButton         = Template::showButtonAction($controllerName, $id);

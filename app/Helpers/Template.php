@@ -18,17 +18,38 @@ class Template
         return $xhtml;
     }
 
-    public static function changeStatus($controllerName, $id, $status)
+    public static function showItemStatus($controllerName, $id, $status)
     {
-        $tmpStatus = [
-            'active' => ['name' => 'Active', 'class' => 'btn-success'],
-            'Inactive' => ['name' => 'Inactive', 'class' => 'btn-danger']
-        ];
+        $tmpStatus = Config::get('zvn.template.status');
 
         $link = route($controllerName . '/status', ['status' => $status, 'id' => $id]);
         $currentStatus = $tmpStatus[$status];
 
         $xhtml = sprintf('<a href="%s" type="button" class="btn btn-round %s">%s</a>', $link, $currentStatus['class'], $currentStatus['name']);
+
+        return $xhtml;
+    }
+
+    public static function showButtonFilter($countByStatus)
+    {
+        $tmpStatus = Config::get('zvn.template.status');
+        $xhtml = null;
+        if(count($countByStatus) > 0) {
+            array_unshift($countByStatus, 
+                [
+                    'status' => 'ALL', 
+                    'count' => array_sum(array_column($countByStatus, 'count'))
+                ]
+            );
+            foreach($countByStatus as $value){
+                $currentStatus = $tmpStatus[$value['status']];
+                $xhtml .= sprintf('<a href="" type="button" class="btn btn-primary">%s 
+                                <span class="badge bg-white"  >%s</span>
+                             </a>', $currentStatus['name'], $value['count']); 
+            }
+
+            
+        }
 
         return $xhtml;
     }

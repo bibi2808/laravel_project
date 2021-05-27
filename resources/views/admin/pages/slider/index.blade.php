@@ -1,27 +1,26 @@
+<?php
+    {{-- echo "<pre/>";
+    print_r($items);
+    echo "<pre/>" --}}
+?>
+
 @extends('admin.main')
 
 
 @section('content')
     <div class="page-header zvn-page-header clearfix">
         <div class="zvn-page-header-title">
-            <h3>Danh sách User</h3>
+            <h3>Users</h3>
         </div>
         <div class="zvn-add-new pull-right">
             <a href="/form" class="btn btn-success"><i
-                    class="fa fa-plus-circle"></i> Thêm mới</a>
+                    class="fa fa-plus-circle"></i> Add</a>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
-                <div class="x_title">
-                    <h2>Bộ lọc</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li class="pull-right"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
+                @include('admin.templates.x_title', ['title' => 'Filter'])
                 <div class="x_content">
                     <div class="row">
                         <div class="col-md-6"><a
@@ -62,8 +61,8 @@
                                 <input type="text" class="form-control" name="search_value" value="">
                                 <span class="input-group-btn">
                             <button id="btn-clear" type="button" class="btn btn-success"
-                                    style="margin-right: 0px">Xóa tìm kiếm</button>
-                            <button id="btn-search" type="button" class="btn btn-primary">Tìm kiếm</button>
+                                    style="margin-right: 0px">Clear</button>
+                            <button id="btn-search" type="button" class="btn btn-primary">Search</button>
                             </span>
                                 <input type="hidden" name="search_field" value="all">
                             </div>
@@ -85,15 +84,8 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
-                <div class="x_title">
-                    <h2>Danh sách</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li class="pull-right"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
-                @include('admin.slider.list')
+                @include('admin.templates.x_title', ['title' => 'List Sliders'])
+                @include('admin.pages.slider.list')
             </div>
         </div>
     </div>
@@ -102,16 +94,7 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
-                <div class="x_title">
-                    <h2>Phân trang
-                    </h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li class="pull-right"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
+                @include('admin.templates.x_title', ['title' => 'Pagination'])
 
                 <div class="x_content">
                     <div class="row">

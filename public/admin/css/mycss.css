@@ -81,3 +81,9 @@ span.highlight{
     padding-left: 0;
     padding-right: 20px;
 }
+
+.my-active span{
+    background-color: #5cb85c !important;
+    color: white !important;
+    border-color: #5cb85c !important;
+}

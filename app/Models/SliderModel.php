@@ -13,17 +13,18 @@ class SliderModel extends Model
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modified';
 
-    public function listItems($params, $option) {
+    public function listItems($params, $option)
+    {
         $result = null;
 
-        if($option['task'] == "admin-list-items"){
+        if ($option['task'] == "admin-list-items") {
             $result = self::select('id', 'name', 'description', 'link', 'thumb', 'created', 'created_by', 'modified', 'modified_by', 'status')
-            // ->where('id', '>=', 6)
-            ->get();
-        } 
+                // ->where('id', '>=', 6)
+                ->orderBy('id', 'desc')
+                ->paginate($params['pagination']['totalPerPage']);
+            // ->get();
+        }
 
         return $result;
     }
-    
-    
 }

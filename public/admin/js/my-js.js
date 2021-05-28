@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	let $btnSearch        = $("button#btn-search");
-	let $btnClearSearch	  = $("button#btn-clear");
+	let $btnClearSearch	  = $("button#btn-clear-search");
 
 	let $inputSearchField = $("input[name  = search_field]");
 	let $inputSearchValue = $("input[name  = search_value]");
@@ -13,10 +13,10 @@ $(document).ready(function() {
 	$("a.select-field").click(function(e) {
 		e.preventDefault();
 
-		let field 		= $(this).data('field');
+		let field 		= $(this).data('field'); // lấy data ở field
 		let fieldName 	= $(this).html();
-		$("button.btn-active-field").html(fieldName + ' <span class="caret"></span>');
-    	$inputSearchField.val(field);
+		$("button.btn-active-field").html(fieldName + '<span class="caret"></span>');
+    	$inputSearchField.val(field);// gán data cho new field
 	});
 
 	$btnSearch.click(function() {
@@ -134,14 +134,14 @@ $(document).ready(function() {
 	});
 
 	//Init datepicker
-	$('.datepicker').datepicker({
-		format: 'dd-mm-yyyy',
-	});
+	// $('.datepicker').datepicker({
+	// 	format: 'dd-mm-yyyy',
+	// });
 
 
-	//Confirm button delete item
-	$('.btn-delete').on('click', function() {
-		if(!confirm('Bạn có chắc muốn xóa phần tử?'))
-			return false;
-	});
+	// //Confirm button delete item
+	// $('.btn-delete').on('click', function() {
+	// 	if(!confirm('Bạn có chắc muốn xóa phần tử?'))
+	// 		return false;
+	// });
 });

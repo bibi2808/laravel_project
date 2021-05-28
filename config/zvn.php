@@ -3,19 +3,47 @@
 
 return [
     'url' => [
-        'prefix_admin' => 'admin',
-        'prefix_dashboard' => 'dashboard',
-        'prefix_news' => 'news',
+        'prefix_admin'      => 'admin',
+        'prefix_dashboard'  => 'dashboard',
+        'prefix_news'       => 'news',
     ],
     'format' => [
-        'short_time' => 'd/m/Y',
-        'long_time' => 'H:m:s d/m/Y',
+        'short_time'        => 'd/m/Y',
+        'long_time'         => 'H:m:s d/m/Y',
     ],
     'template' => [
         'status' => [
-            'ALL' => ['name' => 'Tất cả', 'class' => 'btn-success'],
-            'active' => ['name' => 'Kích hoạt', 'class' => 'btn-success'],
-            'Inactive' => ['name' => 'Chưa Kích hoạt', 'class' => 'btn-danger']
+            'all'           => ['name' => 'ALL', 'class' => 'btn-success'],
+            'active'        => ['name' => 'Active', 'class' => 'btn-success'],
+            'inactive'      => ['name' => 'Inactive', 'class' => 'btn-danger'],
+            'default'       => ['name' => 'Default', 'class' => 'btn-danger'],
+            'block'         => ['name' => 'block', 'class' => 'btn-danger']
+        ],
+        'search' => [
+            'all'           => ['name' => 'Search by All'],
+            'id'            => ['name' => 'Search by ID'],
+            'name'          => ['name' => 'Search by Name'],
+            'username'      => ['name' => 'Search by Username'],
+            'fullname'      => ['name' => 'Search by Fullname'],
+            'email'         => ['name' => 'Search by Email'],
+            'description'   => ['name' => 'Search by Description'],
+            'link'          => ['name' => 'Search by Link'],
+            'content'       => ['name' => 'Search by Content'],
+        ],
+        'button' => [
+            'edit'      => ['class' => 'btn-success',  'title'  => 'Edit',      'icon' => 'fa-pencil',   'route-name' => '/form'],
+            'delete'    => ['class' => 'btn-danger',   'title'  => 'Delete',    'icon' => 'fa-trash',    'route-name' => '/delete'],
+            'info'      => ['class' => 'btn-info',     'title'  => 'Info',      'icon' => 'fa-pencil',   'route-name' => '/delete'],
+        ]
+    ],
+    'config' => [
+        'search' => [
+            'slider' => ['all', 'id', 'name', 'description', 'link'],
+            'default' => ['all', 'id']
+        ],
+        'button' => [
+            'default'   => ['edit', 'delete'],
+            'slider'    => ['edit', 'delete']
         ]
     ]
 ];

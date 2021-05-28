@@ -8,7 +8,7 @@
     </div>
         <div class="profile_info">
         <span>Welcome,</span>
-        <h2TuanDA</h2>
+        <h2>TuanDA</h2>
     </div>
 </div>
         

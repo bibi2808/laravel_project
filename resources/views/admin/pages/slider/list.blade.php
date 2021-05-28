@@ -36,7 +36,7 @@
                             <td width="40%">
                                 <p><strong>Name: </strong>{{ $name }}</p>
                                 <p><strong>Description: </strong>{{ $description }}</p>
-                                <p><strong>Link: </strong>{{ $link }}</p>
+                                <p><strong>Link: </strong><a href="{{ $link }}">{{ $link }}</a></p>
                                 <p>{!! $thumb !!}</p>
                             </td>
                             <td>{!! $status !!}</td>

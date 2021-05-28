@@ -14,7 +14,7 @@
         </div>
         <div class="col-md-12">
             {{ $items->links('pagination.pagination_admin') }}
-            // ['paginator' => $items]) nếu muốn đặt tên khác [paginator] thì truyền thêm params , ko truyền thì mặc định là paginator
+            {{--  ['paginator' => $items]) nếu muốn đặt tên khác [paginator] thì truyền thêm params , ko truyền thì mặc định là paginator  --}}
         </div>
     </div>
 </div>

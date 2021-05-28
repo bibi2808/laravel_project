@@ -23,7 +23,7 @@ $(document).ready(function() {
 
 		var pathname	= window.location.pathname;
 		let searchParams= new URLSearchParams(window.location.search);
-		params 			= ['page', 'filter_status', 'select_field', 'select_value'];
+		const params 			= ['page', 'filter_status', 'select_field', 'select_value'];
 
 		let link		= "";
 		$.each( params, function( key, value ) {

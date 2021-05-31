@@ -37,8 +37,10 @@ Route::prefix($prefixAdmin)->group(function () {
 
         Route::get('/',                             [SliderController::class, 'index'])->name($controllerName);
         Route::get('form/{id?}',                    [SliderController::class, 'form'])->name($controllerName . '/form')->where('id', '[0-9]+');
+        Route::post('save',                         [SliderController::class, 'save'])->name($controllerName . '/save');
         Route::get('delete/{id}',                   [SliderController::class, 'delete'])->name($controllerName . '/delete')->where('id', '[0-9]+');
         Route::get('change-status-{status}/{id}',   [SliderController::class, 'status'])->name($controllerName . '/status')->where(['id' => '[0-9]+', 'status' => '[a-z]+']);
+
         
     });
     

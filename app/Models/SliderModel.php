@@ -74,4 +74,20 @@ class SliderModel extends Model
         }
         
     }
+
+    public function delete($params = null, $option = null) {
+        if($option['task'] == 'delete-item'){
+            self::where('id', $params['id'])->delete();
+        }
+    }
+
+    public function getItem($params, $option){
+        $result = null;
+        
+        if($option['task'] == 'get-item'){
+            $result = self::select('id', 'name', 'description', 'link', 'thumb', 'status')
+                            ->where('id', $params['id'])->first();
+        }
+        return $result;
+    }
 }

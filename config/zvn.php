@@ -12,6 +12,12 @@ return [
         'long_time'         => 'H:m:s d/m/Y',
     ],
     'template' => [
+        'form_label' => [
+            'class' => 'control-label col-md-3 col-sm-3 col-xs-12',
+        ],
+        'form_input' => [
+            'class' => 'form-control col-md-6 col-xs-12',
+        ],
         'status' => [
             'all'           => ['name' => 'ALL', 'class' => 'btn-success'],
             'active'        => ['name' => 'Active', 'class' => 'btn-success'],
@@ -32,7 +38,7 @@ return [
         ],
         'button' => [
             'edit'      => ['class' => 'btn-success',  'title'  => 'Edit',      'icon' => 'fa-pencil',   'route-name' => '/form'],
-            'delete'    => ['class' => 'btn-danger',   'title'  => 'Delete',    'icon' => 'fa-trash',    'route-name' => '/delete'],
+            'delete'    => ['class' => 'btn-danger btn-delete',   'title'  => 'Delete',    'icon' => 'fa-trash',    'route-name' => '/delete'],
             'info'      => ['class' => 'btn-info',     'title'  => 'Info',      'icon' => 'fa-pencil',   'route-name' => '/delete'],
         ]
     ],

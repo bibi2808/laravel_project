@@ -2,8 +2,6 @@
 
 namespace App\Helpers;
 
-use Config;
-
 class Template
 {
     public static function modeHistory($by, $time)
@@ -12,14 +10,14 @@ class Template
             '<p><i class="fa fa-user"></i> %s </p>
                         <p><i class="fa fa-clock-o"></i> %s </p>',
             $by,
-            date(Config::get('zvn.format.long_time'), strtotime($time))
+            date(config('zvn.format.long_time'), strtotime($time))
         );
         return $xhtml;
     }
 
     public static function showItemStatus($controllerName, $id, $statusValue)
     {
-        $tmpStatus = Config::get('zvn.template.status');
+        $tmpStatus = config('zvn.template.status');
         $statusValue = array_key_exists($statusValue, $tmpStatus) ? $statusValue : 'default';
 
         $currentTemplateStatus = $tmpStatus[$statusValue];
@@ -36,7 +34,7 @@ class Template
 
     public static function showButtonFilter($controllerName, $itemsStatusCount, $currentFilterStatus)
     {
-        $tmpStatus = Config::get('zvn.template.status');
+        $tmpStatus = config('zvn.template.status');
         $xhtml = null;
 
         if (count($itemsStatusCount) > 0) {
@@ -66,8 +64,8 @@ class Template
     public static function showAreaSearch($controllerName, $paramsSearch)
     {
         $xhtml = null;
-        $tmpField = Config::get('zvn.template.search'); // 'all' => ['name' => 'Search by All'],
-        $fieldController = Config::get('zvn.config.search'); // 'slider' => ['all', 'id', 'description'],
+        $tmpField = config('zvn.template.search'); // 'all' => ['name' => 'Search by All'],
+        $fieldController = config('zvn.config.search'); // 'slider' => ['all', 'id', 'description'],
 
         // kiểm tra field search có tồn tại trong route Slider không?
         $searchField = in_array($paramsSearch['field'], $fieldController[$controllerName]) ? $paramsSearch['field'] : 'all';
@@ -112,10 +110,10 @@ class Template
     public static function showButtonAction($controllerName, $id)
     {
         // define type of button
-        $tmlButton = Config::get('zvn.template.button');
+        $tmlButton = config('zvn.template.button');
 
         // define button of page
-        $buttonArea = Config::get('zvn.config.button');
+        $buttonArea = config('zvn.config.button');
 
         $controllerName = (array_key_exists($controllerName, $buttonArea)) ? $controllerName : 'default';
         $listButtons = $buttonArea[$controllerName];

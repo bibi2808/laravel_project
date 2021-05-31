@@ -38,10 +38,35 @@ class SliderController extends Controller
     }
 
     public function status(Request $request){
-        $this->params['currentStatus'] = $request->status;
-        $this->params['id'] = $request->id;
-        $this->model->saveItem($this->params,['task' => 'change-status']);
+        $params['currentStatus'] = $request->status;
+        $params['id'] = $request->id;
+        $this->model->saveItem($params,['task' => 'change-status']);
 
         return redirect()->route($this->controllerName)->with('status', 'Status updated!');// flash keyword
+    }
+
+    public function delete(Request $request) {
+        $params['id'] = $request->id;
+        $this->model->delete($params, ['task' => 'delete-item']);
+
+        return redirect()->route($this->controllerName)->with('status', 'Delete Item successfully!');
+    }
+
+    public function form(Request $request){
+        $item = null;
+        // echo $request->id;
+        if($request->id !== null) {
+            $params['id'] = $request->id;
+            $item = $this->model->getItem($params, ['task' => 'get-item']);
+        }
+        
+
+        return view($this->pathViewController . "form", [
+            'item' => $item
+        ]);
+    }
+
+    public function save(Request $request){
+        echo __METHOD__;
     }
 }

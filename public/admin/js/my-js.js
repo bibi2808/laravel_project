@@ -142,8 +142,8 @@ $(document).ready(function() {
 
 
 	// //Confirm button delete item
-	// $('.btn-delete').on('click', function() {
-	// 	if(!confirm('Bạn có chắc muốn xóa phần tử?'))
-	// 		return false;
-	// });
+	$('.btn-delete').on('click', function() {
+		if(!confirm('Bạn có chắc muốn xóa phần tử?'))
+			return false;
+	});
 });

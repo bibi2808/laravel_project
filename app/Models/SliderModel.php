@@ -28,7 +28,7 @@ class SliderModel extends Model
         $result = null;
         
         if ($option['task'] == "admin-list-items") {
-            $query = $this::select('id', 'name', 'description', 'link', 'thumb', 'created', 'created_by', 'modified', 'modified_by', 'status');
+            $query = self::select('id', 'name', 'description', 'link', 'thumb', 'created', 'created_by', 'modified', 'modified_by', 'status');
             
             if($params['filter']['status'] !== "all"){
                 $query->where('status', '=', $params['filter']['status']);
@@ -64,5 +64,14 @@ class SliderModel extends Model
         }
 
         return $result;
+    }
+
+    public function saveItem($params = null, $option = null){
+        if($option['task'] == 'change-status'){
+            $status = ($params['currentStatus'] == 'active') ? 'inactive' : 'active';
+            self::where('id', $params['id'])
+                ->update(['status' => $status]);
+        }
+        
     }
 }

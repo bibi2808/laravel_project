@@ -15,7 +15,7 @@ class SliderController extends Controller
     public function __construct()
     {
         $this->model = new MainModel(); // khởi tạo đối tượng model
-        $this->params['pagination']['totalPerPage'] = 10; // số items trên 1 page
+        $this->params['pagination']['totalPerPage'] = 5; // số items trên 1 page
         view()->share("controllerName", $this->controllerName); // share controllerName to all of views in SliderClass
     }
 
@@ -35,5 +35,13 @@ class SliderController extends Controller
             'items'             => $items,
             'itemsStatusCount'  => $itemsStatusCount
         ]);
+    }
+
+    public function status(Request $request){
+        $this->params['currentStatus'] = $request->status;
+        $this->params['id'] = $request->id;
+        $this->model->saveItem($this->params,['task' => 'change-status']);
+
+        return redirect()->route($this->controllerName)->with('status', 'Status updated!');// flash keyword
     }
 }

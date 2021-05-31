@@ -66,6 +66,21 @@ class SliderController extends Controller
     }
 
     public function save(MainRequest $request){
+        if($request->method() == 'POST'){
+            $params = $request->all();
+
+            $task = 'add-item';
+            $notify = 'Added';
+
+            if($params['id'] !== null) {
+                $task = 'edit-item';
+                $notify = 'Updated!';
+            }
+
+            $this->model->saveItem($params, ['task' => $task]);
+
+            return redirect()->route($this->controllerName)->with('notify', $notify);
+        }
 
         echo __METHOD__;
     }

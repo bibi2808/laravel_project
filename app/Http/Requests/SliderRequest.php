@@ -24,20 +24,23 @@ class SliderRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:5|max:100',
-            'description' => 'required',
-            'link' => 'bail|required|min:5|url'
+            // 'name'          => 'bail|required|min:5|max:100',
+            // 'description'   => 'bail|required',
+            // 'link'          => 'bail|required|min:5|url',
+            // 'status'        => 'bail|in:active,inactive',
+            'thumb'         => 'bail|required|image|max:100'
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'name.required' => 'A name is required',
-            'name.min' => 'A name at least :min characters',
-            'description.required' => 'A description is required',
-        ];
-    }
+    // public function messages()
+    // {
+    //     return [
+    //         'name.required' => 'A name is required',
+    //         'name.min' => 'A name at least :min characters',
+    //         'description.required' => 'A description is required',
+            
+    //     ];
+    // }
 
     // public function attributes()
     // {

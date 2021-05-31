@@ -19,12 +19,14 @@ class SliderModel extends Model
         'description',
         'link'
     ];
+    protected $crudNotAccepted = [
+        '_token',
+        'thumb_current',
+        'thumb'
+    ];
 
     public function listItems($params = null, $option = null)
     {
-        // echo '<pre>';
-        //     print_r($params);
-        //     echo '<pre/>';
         $result = null;
         
         if ($option['task'] == "admin-list-items") {
@@ -71,6 +73,13 @@ class SliderModel extends Model
             $status = ($params['currentStatus'] == 'active') ? 'inactive' : 'active';
             self::where('id', $params['id'])
                 ->update(['status' => $status]);
+        } 
+        
+        if($option['task'] == 'add-item') {
+            // $params = array_diff_key($params, array_flip($this->crudNotAccepted));
+            // self::insert($params);
+            $thumb = $params['thumb'];
+            $thumb->store('images/slider');
         }
         
     }

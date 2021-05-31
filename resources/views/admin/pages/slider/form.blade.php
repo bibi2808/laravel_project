@@ -20,7 +20,7 @@
         ],
         [
             'label'     => Form::label('status', 'Status',['class' => $formLabelClass] ),
-            'element'   => Form::select('size', $selectStatus, $item['status'] ?? null,  ['class' => $formInputClass])
+            'element'   => Form::select('status', $selectStatus, $item['status'] ?? null,  ['class' => $formInputClass])
         ],
         [
             'label'     => Form::label('link', 'Link',['class' => $formLabelClass] ),
@@ -28,7 +28,7 @@
         ],
         [
             'label'     => Form::label('thumb', 'Thumb',['class' => $formLabelClass] ),
-            'element'   => Form::file('image', ['class' => $formInputClass]),
+            'element'   => Form::file('thumb', ['class' => $formInputClass]),
             'thumb'     => (!empty($item['id'])) ? Template::showItemThumb($controllerName, $item['thumb'], $item['name']) : null,
             'type'      => 'thumb'
         ],

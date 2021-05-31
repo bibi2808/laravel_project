@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SliderModel as MainModel;
+use App\Http\Requests\SliderRequest as MainRequest;
 
 class SliderController extends Controller
 {
@@ -54,19 +55,18 @@ class SliderController extends Controller
 
     public function form(Request $request){
         $item = null;
-        // echo $request->id;
         if($request->id !== null) {
             $params['id'] = $request->id;
             $item = $this->model->getItem($params, ['task' => 'get-item']);
         }
         
-
         return view($this->pathViewController . "form", [
             'item' => $item
         ]);
     }
 
-    public function save(Request $request){
+    public function save(MainRequest $request){
+
         echo __METHOD__;
     }
 }

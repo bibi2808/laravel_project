@@ -6,25 +6,25 @@
 
     $selectStatus = ['default' => 'Select status', 'active' => config('zvn.template.status.active.name'), 'inactive' => config('zvn.template.status.inactive.name')];
 
-    $inputHiddenID = Form::hidden('id', $item['id']);
-    $inputHiddenThumb = Form::hidden('thumb_current', $item['thumb']);
+    $inputHiddenID = Form::hidden('id', $item['id'] ?? null);
+    $inputHiddenThumb = Form::hidden('thumb_current', $item['thumb'] ?? null);
 
     $elements = [
         [
             'label'     => Form::label('name', 'Name',['class' => $formLabelClass]),
-            'element'   => Form::text('name', $item['name'], ['class' => $formInputClass])
+            'element'   => Form::text('name', $item['name'] ?? null, ['class' => $formInputClass])
         ],
         [
             'label'     => Form::label('description', 'Description',['class' => $formLabelClass] ),
-            'element'   => Form::text('description', $item['description'], ['class' => $formInputClass])
+            'element'   => Form::text('description', $item['description'] ?? null, ['class' => $formInputClass])
         ],
         [
             'label'     => Form::label('status', 'Status',['class' => $formLabelClass] ),
-            'element'   => Form::select('size', $selectStatus, $item['status'],  ['class' => $formInputClass])
+            'element'   => Form::select('size', $selectStatus, $item['status'] ?? null,  ['class' => $formInputClass])
         ],
         [
             'label'     => Form::label('link', 'Link',['class' => $formLabelClass] ),
-            'element'   => Form::text('link', $item['link'], ['class' => $formInputClass])
+            'element'   => Form::text('link', $item['link'] ?? null, ['class' => $formInputClass])
         ],
         [
             'label'     => Form::label('thumb', 'Thumb',['class' => $formLabelClass] ),
@@ -38,7 +38,6 @@
         ]
         
     ];
-    echo Form::file('image');
     
 @endphp
 
@@ -47,26 +46,12 @@
 @section('content')
     @include('admin.templates.page_header', ['pageIndex' => false])
 
+    @include('admin.templates.error')
+
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 @include('admin.templates.x_title', ['title' => 'Form'])
-
-                {{-- 
-                    
-                    
-                    <div class="form-group">
-                        <label for="thumb" class="control-label col-md-3 col-sm-3 col-xs-12">Thumb</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input class="form-control col-md-6 col-xs-12" name="thumb" type="file" id="thumb">
-                            <p style="margin-top: 50px;"><img src="{{ asset('admin/img/slider/LWi6hINpXz.jpeg') }}"
-                                    alt="Ưu đãi học phí" class="zvn-thumb"></p>
-                        </div>
-                    </div>
-                    
-                </form> --}}
-
-
                 
                 {!! Form::open([
                         'method'            => 'POST',
@@ -75,8 +60,9 @@
                         'enctype'           => "multipart/form-data",
                         'class'             => "form-horizontal form-label-left",
                         'id'                => "main-form"]) !!}
+
+
                         {!! FormTemplate::show($elements) !!}
-                        
 
                 {!! Form::close() !!}
                 

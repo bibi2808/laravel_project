@@ -4,12 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use DB;
+use Storage;
 
 class SliderModel extends Model
 {
     use HasFactory;
     protected $table = 'slider';
+    protected $folderUpload = 'slider';
     public $timestamps = false;
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modified';
@@ -21,8 +25,7 @@ class SliderModel extends Model
     ];
     protected $crudNotAccepted = [
         '_token',
-        'thumb_current',
-        'thumb'
+        'thumb_current'
     ];
 
     public function listItems($params = null, $option = null)
@@ -76,19 +79,18 @@ class SliderModel extends Model
         } 
         
         if($option['task'] == 'add-item') {
-            // $params = array_diff_key($params, array_flip($this->crudNotAccepted));
-            // self::insert($params);
-            $thumb = $params['thumb'];
-            $thumb->store('images/slider');
+            
+            $thumb = $params['thumb']; // đối tượng thumb
+            $params['thumb'] = Str::random(10) . '.' . $thumb->clientExtension();
+            $thumb->storeAs($this->folderUpload, $params['thumb'], 'zvn_storage_image'); // ( nơi lưu trữ image sau khi upload, newNameFile )
+            $params = array_diff_key($params, array_flip($this->crudNotAccepted));
+            self::insert($params);
+
         }
         
     }
 
-    public function delete($params = null, $option = null) {
-        if($option['task'] == 'delete-item'){
-            self::where('id', $params['id'])->delete();
-        }
-    }
+    
 
     public function getItem($params, $option){
         $result = null;
@@ -97,6 +99,19 @@ class SliderModel extends Model
             $result = self::select('id', 'name', 'description', 'link', 'thumb', 'status')
                             ->where('id', $params['id'])->first();
         }
+
+        if($option['task'] == 'get-thumb'){
+            $result = self::select('id', 'thumb')
+                            ->where('id', $params['id'])->first();
+        }
         return $result;
+    }
+
+    public function delete($params = null, $option = null) {
+        if($option['task'] == 'delete-item'){
+            $item = self::getItem($params, ['task'=>'get-thumb']);
+            Storage::disk('zvn_storage_image')->delete($this->folderUpload . '/' . $item['thumb']);
+            self::where('id', $params['id'])->delete();
+        }
     }
 }

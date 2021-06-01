@@ -5,6 +5,7 @@ return [
     'url' => [
         'prefix_admin'      => 'admin',
         'prefix_dashboard'  => 'dashboard',
+        'prefix_dashboard'  => 'category',
         'prefix_news'       => 'hot-new',
     ],
     'format' => [
@@ -45,11 +46,13 @@ return [
     'config' => [
         'search' => [
             'slider' => ['all', 'id', 'name', 'description', 'link'],
+            'category' => ['all', 'id', 'name'],
             'default' => ['all', 'id']
         ],
         'button' => [
-            'default'   => ['edit', 'delete'],
-            'slider'    => ['edit', 'delete']
+            'default'       => ['edit', 'delete'],
+            'slider'        => ['edit', 'delete'],
+            'category'      => ['edit', 'delete']
         ]
     ]
 ];

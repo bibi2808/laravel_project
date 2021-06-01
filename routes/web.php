@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\HomeController;
@@ -38,6 +39,26 @@ Route::prefix($prefixAdmin)->group(function () {
     });
     
 });
+
+// ============================================ CATEGORY ==========================================
+Route::prefix($prefixAdmin)->group(function () {
+
+    $prefix = "category";
+    $controllerName = "category";
+    
+    Route::prefix($prefix)->group(function () use($controllerName){
+
+        Route::get('/',                             [CategoryController::class, 'index'])->name($controllerName);
+        Route::get('form/{id?}',                    [CategoryController::class, 'form'])->name($controllerName . '/form')->where('id', '[0-9]+');
+        Route::post('save',                         [CategoryController::class, 'save'])->name($controllerName . '/save');
+        Route::get('delete/{id}',                   [CategoryController::class, 'delete'])->name($controllerName . '/delete')->where('id', '[0-9]+');
+        Route::get('change-status-{status}/{id}',   [CategoryController::class, 'status'])->name($controllerName . '/status')->where(['id' => '[0-9]+', 'status' => '[a-z]+']);
+
+        
+    });
+    
+});
+
 
 // ============================================ HOME PAGE ==========================================
 Route::prefix($prefixNews)->group(function () {

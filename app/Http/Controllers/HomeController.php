@@ -10,9 +10,7 @@ class HomeController extends Controller
 {
     private $pathViewController = "news.pages.home.";
     private $controllerName = "home";
-    private $notify = 'status';
     private $params = [];
-    private $model;
 
     public function __construct()
     {

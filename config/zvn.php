@@ -5,7 +5,7 @@ return [
     'url' => [
         'prefix_admin'      => 'admin',
         'prefix_dashboard'  => 'dashboard',
-        'prefix_news'       => 'news',
+        'prefix_news'       => 'hot-new',
     ],
     'format' => [
         'short_time'        => 'd/m/Y',
@@ -13,10 +13,10 @@ return [
     ],
     'template' => [
         'form_label' => [
-            'class' => 'control-label col-md-3 col-sm-3 col-xs-12',
+            'class' => 'control-label col-md-3 col-sm-3 col-xs-12'
         ],
         'form_input' => [
-            'class' => 'form-control col-md-6 col-xs-12',
+            'class' => 'form-control col-md-6 col-xs-12'
         ],
         'status' => [
             'all'           => ['name' => 'ALL', 'class' => 'btn-success'],

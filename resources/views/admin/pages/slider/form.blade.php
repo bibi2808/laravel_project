@@ -1,8 +1,8 @@
 @php
     use App\Helpers\Form as FormTemplate;
     use App\Helpers\Template as Template;
-    $formLabelClass = config('zvn.template.form_label.class');
-    $formInputClass = config('zvn.template.form_input.class');
+    $formLabelAttr = config('zvn.template.form_label');
+    $formInputAtts = config('zvn.template.form_input');
 
     $selectStatus = ['default' => 'Select status', 'active' => config('zvn.template.status.active.name'), 'inactive' => config('zvn.template.status.inactive.name')];
 
@@ -11,24 +11,24 @@
 
     $elements = [
         [
-            'label'     => Form::label('name', 'Name',['class' => $formLabelClass]),
-            'element'   => Form::text('name', $item['name'] ?? null, ['class' => $formInputClass])
+            'label'     => Form::label('name', 'Name',$formLabelAttr),
+            'element'   => Form::text('name', $item['name'] ?? null, $formInputAtts)
         ],
         [
-            'label'     => Form::label('description', 'Description',['class' => $formLabelClass] ),
-            'element'   => Form::text('description', $item['description'] ?? null, ['class' => $formInputClass])
+            'label'     => Form::label('description', 'Description',$formLabelAttr ),
+            'element'   => Form::text('description', $item['description'] ?? null, $formInputAtts)
         ],
         [
-            'label'     => Form::label('status', 'Status',['class' => $formLabelClass] ),
-            'element'   => Form::select('status', $selectStatus, $item['status'] ?? null,  ['class' => $formInputClass])
+            'label'     => Form::label('status', 'Status',$formLabelAttr ),
+            'element'   => Form::select('status', $selectStatus, $item['status'] ?? null,  $formInputAtts)
         ],
         [
-            'label'     => Form::label('link', 'Link',['class' => $formLabelClass] ),
-            'element'   => Form::text('link', $item['link'] ?? null, ['class' => $formInputClass])
+            'label'     => Form::label('link', 'Link',$formLabelAttr ),
+            'element'   => Form::text('link', $item['link'] ?? null, $formInputAtts)
         ],
         [
-            'label'     => Form::label('thumb', 'Thumb',['class' => $formLabelClass] ),
-            'element'   => Form::file('thumb', ['class' => $formInputClass]),
+            'label'     => Form::label('thumb', 'Thumb',$formLabelAttr ),
+            'element'   => Form::file('thumb', $formInputAtts),
             'thumb'     => (!empty($item['id'])) ? Template::showItemThumb($controllerName, $item['thumb'], $item['name']) : null,
             'type'      => 'thumb'
         ],
@@ -54,15 +54,15 @@
                 @include('admin.templates.x_title', ['title' => 'Form'])
                 
                 {!! Form::open([
-                        'method'            => 'POST',
-                        'action'            =>  [ucfirst($controllerName) . "Controller@save"],// Noted !!!
-                        'accept-charset'    => "UTF-8",
-                        'enctype'           => "multipart/form-data",
-                        'class'             => "form-horizontal form-label-left",
-                        'id'                => "main-form"]) !!}
+                    'method'            => 'POST',
+                    'action'            =>  [ucfirst($controllerName) . "Controller@save"],// Noted !!!
+                    'accept-charset'    => "UTF-8",
+                    'enctype'           => "multipart/form-data",
+                    'class'             => "form-horizontal form-label-left",
+                    'id'                => "main-form"]) 
+                !!}
 
-
-                        {!! FormTemplate::show($elements) !!}
+                {!! FormTemplate::show($elements) !!}
 
                 {!! Form::close() !!}
                 

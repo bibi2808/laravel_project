@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,18 +17,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 $prefixAdmin = config("zvn.url.prefix_admin"); // admin
+$prefixNews = config("zvn.url.prefix_news"); // hot-news
 
-Route::prefix($prefixAdmin)->group(function () {
 
-    $prefix = "dashboard";
-    $controllerName = "dashboard";
-
-    Route::prefix($prefix)->group(function () use($controllerName){
-        Route::get('/', [DashboardController::class, 'index'])->name($controllerName);
-    });
-    
-});
-
+// ============================================ SLIDER ==========================================
 Route::prefix($prefixAdmin)->group(function () {
 
     $prefix = "slider";
@@ -46,7 +39,30 @@ Route::prefix($prefixAdmin)->group(function () {
     
 });
 
-Route::get('/', function () {
-    return view('welcome');
+// ============================================ HOME PAGE ==========================================
+Route::prefix($prefixNews)->group(function () {
+
+    $prefix = "";
+    $controllerName = "home";
+    
+    Route::prefix($prefix)->group(function () use($controllerName){
+
+        Route::get('/', [HomeController::class, 'index'])->name($controllerName);
+    
+    });
+    
+});
+
+
+// ============================================ DASHBOARD ==========================================
+Route::prefix($prefixAdmin)->group(function () {
+
+    $prefix = "dashboard";
+    $controllerName = "dashboard";
+
+    Route::prefix($prefix)->group(function () use($controllerName){
+        Route::get('/', [DashboardController::class, 'index'])->name($controllerName);
+    });
+    
 });
 

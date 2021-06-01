@@ -10,6 +10,7 @@ class SliderController extends Controller
 {
     private $pathViewController = "admin.pages.slider.";
     private $controllerName = "slider";
+    private $notify = 'status';
     private $params = [];
     private $model;
 
@@ -43,14 +44,14 @@ class SliderController extends Controller
         $params['id'] = $request->id;
         $this->model->saveItem($params,['task' => 'change-status']);
 
-        return redirect()->route($this->controllerName)->with('status', 'Status updated!');// flash keyword
+        return redirect()->route($this->controllerName)->with($this->notify, 'Status updated!');// flash keyword
     }
 
     public function delete(Request $request) {
         $params['id'] = $request->id;
         $this->model->delete($params, ['task' => 'delete-item']);
 
-        return redirect()->route($this->controllerName)->with('status', 'Delete Item successfully!');
+        return redirect()->route($this->controllerName)->with($this->notify, 'Delete Item successfully!');
     }
 
     public function form(Request $request){
@@ -79,7 +80,7 @@ class SliderController extends Controller
 
             $this->model->saveItem($params, ['task' => $task]);
 
-            return redirect()->route($this->controllerName)->with('notify', $notify);
+            return redirect()->route($this->controllerName)->with($this->notify, $notify);
         }
 
         echo __METHOD__;

@@ -8,7 +8,7 @@ class Template
     {
         $xhtml = sprintf(
             '<p><i class="fa fa-user"></i> %s </p>
-                        <p><i class="fa fa-clock-o"></i> %s </p>',
+            <p><i class="fa fa-clock-o"></i> %s </p>',
             $by,
             date(config('zvn.format.long_time'), strtotime($time))
         );

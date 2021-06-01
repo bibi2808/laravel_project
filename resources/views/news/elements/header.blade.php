@@ -37,7 +37,7 @@ $xhtmlMenuMobile = '';
                         <div class="header_extra ml-auto d-flex flex-row align-items-center justify-content-start">
                             <a href="#">
                                 <div class="background_image"
-                                    style="background-image:url(images/zendvn-online.png);background-size: contain">
+                                    style="background-image:url({{ asset('news/images/zendvn-online.png') }});background-size: contain">
                                 </div>
                             </a>
                         </div>

@@ -32,6 +32,22 @@ class Template
         return $xhtml;
     }
 
+    public static function showItemIsHome($controllerName, $id, $isHomesValue)
+    {
+        $tmpIsHome = config('zvn.template.is_home');
+        $isHomesValue = array_key_exists($isHomesValue, $tmpIsHome) ? $isHomesValue : 'yes';
+
+        $currentTemplateIsHome = $tmpIsHome[$isHomesValue];
+        $link = route($controllerName . '/isHome', ['isHome' => $isHomesValue, 'id' => $id]);
+        $xhtml = sprintf(
+            '<a href="%s" type="button" class="btn btn-round %s">%s</a>',
+            $link,
+            $currentTemplateIsHome['class'],
+            $currentTemplateIsHome['name']
+        );
+        return $xhtml;
+    }
+
     public static function showButtonFilter($controllerName, $itemsStatusCount, $currentFilterStatus)
     {
         $tmpStatus = config('zvn.template.status');

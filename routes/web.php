@@ -54,7 +54,7 @@ Route::prefix($prefixAdmin)->group(function () {
         Route::get('delete/{id}',                   [CategoryController::class, 'delete'])->name($controllerName . '/delete')->where('id', '[0-9]+');
         Route::get('change-status-{status}/{id}',   [CategoryController::class, 'status'])->name($controllerName . '/status')->where(['id' => '[0-9]+', 'status' => '[a-z]+']);
 
-        
+        Route::get('change-is-home-{isHome}/{id}',   [CategoryController::class, 'isHome'])->name($controllerName . '/isHome')->where(['id' => '[0-9]+', 'isHome' => '[a-z]+']);
     });
     
 });

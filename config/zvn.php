@@ -26,6 +26,10 @@ return [
             'default'       => ['name' => 'Default', 'class' => 'btn-danger'],
             'block'         => ['name' => 'block', 'class' => 'btn-danger']
         ],
+        'is_home' => [
+            'yes'           => ['name' => 'Show', 'class' => 'btn-primary'],
+            'no'            => ['name' => 'Hile', 'class' => 'btn-warning'],
+        ],
         'search' => [
             'all'           => ['name' => 'Search by All'],
             'id'            => ['name' => 'Search by ID'],

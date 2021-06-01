@@ -22,7 +22,7 @@ class CategoryModel extends AdminModel
         $result = null;
         
         if ($option['task'] == "admin-list-items") {
-            $query = self::select('id', 'name', 'created', 'created_by', 'modified', 'modified_by', 'status');
+            $query = self::select('id', 'name', 'created', 'created_by', 'modified', 'modified_by', 'status', 'is_home');
             
             if($params['filter']['status'] !== "all"){
                 $query->where('status', '=', $params['filter']['status']);
@@ -102,6 +102,16 @@ class CategoryModel extends AdminModel
             $params['modified_by'] = 'TuanDA';
             self::where('id', $params['id'])->update($this->prepareParams($params));
         }
+
+        if($option['task'] == 'change-is-home'){
+            $params['currentIsHome'];
+            
+            $isHome = ($params['currentIsHome'] == 'yes') ? 'no' : 'yes';
+            self::where('id', $params['id'])
+                ->update(['is_home' => $isHome]);
+        } 
+
+        
         
     }
 

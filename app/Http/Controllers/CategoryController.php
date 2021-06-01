@@ -47,6 +47,14 @@ class CategoryController extends Controller
         return redirect()->route($this->controllerName)->with($this->notify, 'Status updated!');// flash keyword
     }
 
+    public function isHome(Request $request){
+        $params['currentIsHome'] = $request->isHome;
+        $params['id'] = $request->id;
+        $this->model->saveItem($params,['task' => 'change-is-home']);
+
+        return redirect()->route($this->controllerName)->with($this->notify, 'Is home updated!');// flash keyword
+    }
+
     public function delete(Request $request) {
         $params['id'] = $request->id;
         $this->model->delete($params, ['task' => 'delete-item']);

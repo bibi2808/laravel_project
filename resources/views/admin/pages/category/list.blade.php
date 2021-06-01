@@ -9,6 +9,7 @@
                     <th class="column-title">#</th>
                     <th class="column-title">Name</th>
                     <th class="column-title">Status</th>
+                    <th class="column-title">Display at Home</th>
                     <th class="column-title">New</th>
                     <th class="column-title">Edit</th>
                     <th class="column-title">Action</th>
@@ -23,6 +24,7 @@
                             $class              = ($key % 2 == 0) ? 'even' : 'odd';
                             $name               = $value['name'];
                             $status             = Template::showItemStatus($controllerName, $id, $value['status']); // $controllerName from Controller
+                            $isHome             = Template::showItemIsHome($controllerName, $id, $value['is_home']); 
                             $createdHistory     = Template::modeHistory($value['created_by'], $value['created']);
                             $modifiedHistory    = Template::modeHistory($value['modified_by'], $value['modified']);
                             $showButton         = Template::showButtonAction($controllerName, $id);
@@ -34,6 +36,7 @@
                                 <p><strong>Name: </strong>{{ $name }}</p>
                             </td>
                             <td>{!! $status !!}</td>
+                            <td>{!! $isHome !!}</td>
                             <td>{!! $createdHistory !!}</td>
                             <td>{!! $createdHistory !!}</td>
                             <td class="last">{!! $showButton !!}</td>

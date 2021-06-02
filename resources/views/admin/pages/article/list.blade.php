@@ -7,10 +7,10 @@
             <thead>
                 <tr class="headings">
                     <th class="column-title">#</th>
-                    <th class="column-title">Name</th>
+                    <th class="column-title">Article Info</th>
+                    <th class="column-title">Thumb</th>
                     <th class="column-title">Status</th>
-                    <th class="column-title">Display at Home</th>
-                    <th class="column-title">Display</th>
+                    <th class="column-title">Category</th>
                     <th class="column-title">Created</th>
                     <th class="column-title">Modified</th>
                     <th class="column-title">Action</th>
@@ -24,9 +24,10 @@
                             $id                 = $value['id'];
                             $class              = ($key % 2 == 0) ? 'even' : 'odd';
                             $name               = $value['name'];
+                            $content            = substr($value['content'], 0, 200);
+                            $thumb              = Template::showItemThumb($controllerName, $value['thumb'], $value['name']);
                             $status             = Template::showItemStatus($controllerName, $id, $value['status']); // $controllerName from Controller
-                            $isHome             = Template::showItemIsHome($controllerName, $id, $value['is_home']);
-                            $display            = Template::showItemDisplay($controllerName, $id, $value['display']); 
+                            $categoryName       = $value['category_name'];
                             $createdHistory     = Template::modeHistory($value['created_by'], $value['created']);
                             $modifiedHistory    = Template::modeHistory($value['modified_by'], $value['modified']);
                             $showButton         = Template::showButtonAction($controllerName, $id);
@@ -34,12 +35,13 @@
 
                         <tr class="{{ $class }} pointer">
                             <td class="">{{ $key }}</td>
-                            <td width="40%">
+                            <td width="25%">
                                 <p><strong>Name: </strong>{{ $name }}</p>
+                                <p><strong>Content: </strong>{{ $content }}</p>
                             </td>
+                            <td width="10%">{!! $thumb !!}</td>
                             <td>{!! $status !!}</td>
-                            <td>{!! $isHome !!}</td>
-                            <td>{!! $display !!}</td>
+                            <td>{!! $categoryName !!}</td>
                             <td>{!! $createdHistory !!}</td>
                             <td>{!! $modifiedHistory !!}</td>
                             <td class="last">{!! $showButton !!}</td>

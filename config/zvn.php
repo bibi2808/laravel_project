@@ -19,6 +19,9 @@ return [
         'form_input' => [
             'class' => 'form-control col-md-6 col-xs-12'
         ],
+        'form_ckeditor' => [
+            'class' => 'form-control col-md-6 col-xs-12 ckeditor'
+        ],
         'status' => [
             'all'           => ['name' => 'ALL', 'class' => 'btn-success'],
             'active'        => ['name' => 'Active', 'class' => 'btn-success'],
@@ -55,12 +58,14 @@ return [
         'search' => [
             'slider' => ['all', 'id', 'name', 'description', 'link'],
             'category' => ['all', 'id', 'name'],
+            'article' => ['all', 'id', 'name'],
             'default' => ['all', 'id']
         ],
         'button' => [
             'default'       => ['edit', 'delete'],
             'slider'        => ['edit', 'delete'],
-            'category'      => ['edit', 'delete']
+            'category'      => ['edit', 'delete'],
+            'article'       => ['edit', 'delete']
         ]
     ]
 ];

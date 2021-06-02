@@ -9,8 +9,8 @@
                     <th class="column-title">#</th>
                     <th class="column-title">Slider Info</th>
                     <th class="column-title">Status</th>
-                    <th class="column-title">New</th>
-                    <th class="column-title">Edit</th>
+                    <th class="column-title">Created</th>
+                    <th class="column-title">Modified</th>
                     <th class="column-title">Action</th>
                 </tr>
             </thead>
@@ -41,7 +41,7 @@
                             </td>
                             <td>{!! $status !!}</td>
                             <td>{!! $createdHistory !!}</td>
-                            <td>{!! $createdHistory !!}</td>
+                            <td>{!! $modifiedHistory !!}</td>
                             <td class="last">{!! $showButton !!}</td>
                         </tr>
                     @endforeach

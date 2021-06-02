@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SliderController;
@@ -34,8 +35,23 @@ Route::prefix($prefixAdmin)->group(function () {
         Route::post('save',                         [SliderController::class, 'save'])->name($controllerName . '/save');
         Route::get('delete/{id}',                   [SliderController::class, 'delete'])->name($controllerName . '/delete')->where('id', '[0-9]+');
         Route::get('change-status-{status}/{id}',   [SliderController::class, 'status'])->name($controllerName . '/status')->where(['id' => '[0-9]+', 'status' => '[a-z]+']);
+    });
+    
+});
 
-        
+// ============================================ ARTICLE ==========================================
+Route::prefix($prefixAdmin)->group(function () {
+
+    $prefix = "article";
+    $controllerName = "article";
+    
+    Route::prefix($prefix)->group(function () use($controllerName){
+
+        Route::get('/',                             [ArticleController::class, 'index'])->name($controllerName);
+        Route::get('form/{id?}',                    [ArticleController::class, 'form'])->name($controllerName . '/form')->where('id', '[0-9]+');
+        Route::post('save',                         [ArticleController::class, 'save'])->name($controllerName . '/save');
+        Route::get('delete/{id}',                   [ArticleController::class, 'delete'])->name($controllerName . '/delete')->where('id', '[0-9]+');
+        Route::get('change-status-{status}/{id}',   [ArticleController::class, 'status'])->name($controllerName . '/status')->where(['id' => '[0-9]+', 'status' => '[a-z]+']);
     });
     
 });
@@ -70,9 +86,7 @@ Route::prefix($prefixNews)->group(function () {
     $controllerName = "home";
     
     Route::prefix($prefix)->group(function () use($controllerName){
-
         Route::get('/', [HomeController::class, 'index'])->name($controllerName);
-    
     });
     
 });

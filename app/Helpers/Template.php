@@ -50,8 +50,7 @@ class Template
 
     public static function showItemDisplay($controllerName, $id, $displayValue)
     {
-        echo $link = route($controllerName . '/display',['display' => 'value_new', 'id' => $id]);
-        echo '<br/>';
+        $link = route($controllerName . '/display',['display' => 'value_new', 'id' => $id]);
 
         $tmpDisplay = config('zvn.template.display');
         $xhtml = sprintf('<select name="select_change_attr" data-url="%s" class="form-control">', $link);
@@ -143,13 +142,15 @@ class Template
 
     public static function showButtonAction($controllerName, $id)
     {
+        
         // define type of button
         $tmlButton = config('zvn.template.button');
 
         // define button of page
         $buttonArea = config('zvn.config.button');
 
-        $controllerName = (array_key_exists($controllerName, $buttonArea)) ? $controllerName : 'default';
+        // check xem đã khai báo button by controllerName ở zvn.php chưa
+        $controllerName = (array_key_exists($controllerName, $buttonArea)) ? $controllerName : 'default'; 
         $listButtons = $buttonArea[$controllerName];
 
         $xhtml = '<div class="zvn-box-btn-filter">';
@@ -157,6 +158,7 @@ class Template
         foreach ($listButtons as $btn) {
             $currentButton = $tmlButton[$btn];
             $link = route($controllerName . $currentButton['route-name'], ['id' => $id]);
+
             $xhtml .= sprintf(
                 '<a href="%s" type="button" class="btn btn-icon %s" data-toggle="tooltip" data-placement="top" data-original-title="%s">
                 <i class="fa %s"></i>
@@ -167,6 +169,7 @@ class Template
                 $currentButton['icon']
             );
         }
+        
 
         $xhtml .= '</div>';
         return $xhtml;

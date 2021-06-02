@@ -9,10 +9,11 @@
                     <th class="column-title">#</th>
                     <th class="column-title">Article Info</th>
                     <th class="column-title">Thumb</th>
+                    <th class="column-title">Type</th>
                     <th class="column-title">Status</th>
                     <th class="column-title">Category</th>
-                    <th class="column-title">Created</th>
-                    <th class="column-title">Modified</th>
+                    {{-- <th class="column-title">Created</th>
+                    <th class="column-title">Modified</th> --}}
                     <th class="column-title">Action</th>
                 </tr>
             </thead>
@@ -28,8 +29,9 @@
                             $thumb              = Template::showItemThumb($controllerName, $value['thumb'], $value['name']);
                             $status             = Template::showItemStatus($controllerName, $id, $value['status']); // $controllerName from Controller
                             $categoryName       = $value['category_name'];
-                            $createdHistory     = Template::modeHistory($value['created_by'], $value['created']);
-                            $modifiedHistory    = Template::modeHistory($value['modified_by'], $value['modified']);
+                            $type               = Template::showItemDisplay($controllerName, $id, $value['type'], 'type'); 
+                            // $createdHistory     = Template::modeHistory($value['created_by'], $value['created']);
+                            // $modifiedHistory    = Template::modeHistory($value['modified_by'], $value['modified']);
                             $showButton         = Template::showButtonAction($controllerName, $id);
                         @endphp
 
@@ -39,11 +41,12 @@
                                 <p><strong>Name: </strong>{{ $name }}</p>
                                 <p><strong>Content: </strong>{{ $content }}</p>
                             </td>
-                            <td width="10%">{!! $thumb !!}</td>
+                            <td width="15%">{!! $thumb !!}</td>
+                            <td>{!! $type !!}</td>
                             <td>{!! $status !!}</td>
                             <td>{!! $categoryName !!}</td>
-                            <td>{!! $createdHistory !!}</td>
-                            <td>{!! $modifiedHistory !!}</td>
+                            {{-- <td>{!! $createdHistory !!}</td>
+                            <td>{!! $modifiedHistory !!}</td> --}}
                             <td class="last">{!! $showButton !!}</td>
                         </tr>
                     @endforeach

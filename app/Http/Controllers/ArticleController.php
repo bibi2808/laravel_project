@@ -18,7 +18,7 @@ class ArticleController extends Controller
     public function __construct()
     {
         $this->model = new MainModel(); // khởi tạo đối tượng model
-        $this->params['pagination']['totalPerPage'] = 5; // số items trên 1 page
+        $this->params['pagination']['totalPerPage'] = 10; // số items trên 1 page
         view()->share("controllerName", $this->controllerName); // share controllerName to all of views in SliderClass
     }
 
@@ -87,5 +87,13 @@ class ArticleController extends Controller
 
             return redirect()->route($this->controllerName)->with($this->notify, $notify);
         }
+    }
+
+    public function type(Request $request){
+        $params['currentDisplay'] = $request->display;
+        $params['id'] = $request->id;
+        $this->model->saveItem($params,['task' => 'change-display']);
+
+        return redirect()->route($this->controllerName)->with($this->notify, 'Change Displat is updated!');// flash keyword
     }
 }

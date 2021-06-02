@@ -23,7 +23,7 @@ class ArticleModel extends AdminModel
         
         if ($option['task'] == "admin-list-items") {
             
-            $query = self::select('a.id', 'a.name', 'a.content', 'a.thumb', 'a.created', 'a.created_by', 'a.modified', 'a.modified_by', 'a.status', 'a.publish_at', 'a.type', 'c.name as category_name')->leftJoin('category as c', 'a.category_id', '=', 'c.id');
+            $query = self::select('a.id', 'a.name', 'a.content', 'a.thumb', 'a.created', 'a.type', 'a.created_by', 'a.modified', 'a.modified_by', 'a.status', 'a.publish_at', 'a.type', 'c.name as category_name')->leftJoin('category as c', 'a.category_id', '=', 'c.id');
             
             if($params['filter']['status'] !== "all"){
                 $query->where('status', '=', $params['filter']['status']);

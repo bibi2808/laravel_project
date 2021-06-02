@@ -48,11 +48,11 @@ class Template
         return $xhtml;
     }
 
-    public static function showItemDisplay($controllerName, $id, $displayValue)
+    public static function showItemDisplay($controllerName, $id, $displayValue, $type)
     {
-        $link = route($controllerName . '/display',['display' => 'value_new', 'id' => $id]);
+        $link = route($controllerName . '/' . $type,[$type => 'value_new', 'id' => $id]);
 
-        $tmpDisplay = config('zvn.template.display');
+        $tmpDisplay = config('zvn.template.' . $type);
         $xhtml = sprintf('<select name="select_change_attr" data-url="%s" class="form-control">', $link);
 
 

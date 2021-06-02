@@ -26,7 +26,7 @@
                             $name               = $value['name'];
                             $status             = Template::showItemStatus($controllerName, $id, $value['status']); // $controllerName from Controller
                             $isHome             = Template::showItemIsHome($controllerName, $id, $value['is_home']);
-                            $display            = Template::showItemDisplay($controllerName, $id, $value['display']); 
+                            $display            = Template::showItemDisplay($controllerName, $id, $value['display'], 'display'); 
                             $createdHistory     = Template::modeHistory($value['created_by'], $value['created']);
                             $modifiedHistory    = Template::modeHistory($value['modified_by'], $value['modified']);
                             $showButton         = Template::showButtonAction($controllerName, $id);

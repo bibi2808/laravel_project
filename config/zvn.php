@@ -37,6 +37,10 @@ return [
             'list'           => ['name' => 'List'],
             'grid'           => ['name' => 'Grid'],
         ],
+        'type' => [
+            'feature'        => ['name' => 'Feature'],
+            'normal'         => ['name' => 'Normal'],
+        ],
         'search' => [
             'all'           => ['name' => 'Search by All'],
             'id'            => ['name' => 'Search by ID'],

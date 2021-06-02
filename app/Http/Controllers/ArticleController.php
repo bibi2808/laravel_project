@@ -90,9 +90,11 @@ class ArticleController extends Controller
     }
 
     public function type(Request $request){
-        $params['currentDisplay'] = $request->display;
+        
+        $params['currentType'] = $request->type;
         $params['id'] = $request->id;
-        $this->model->saveItem($params,['task' => 'change-display']);
+        
+        $this->model->saveItem($params,['task' => 'change-type']);
 
         return redirect()->route($this->controllerName)->with($this->notify, 'Change Displat is updated!');// flash keyword
     }

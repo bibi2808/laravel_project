@@ -48,11 +48,11 @@ class Template
         return $xhtml;
     }
 
-    public static function showItemDisplay($controllerName, $id, $displayValue, $type)
+    public static function showItemDisplay($controllerName, $id, $displayValue, $fieldName)
     {
-        $link = route($controllerName . '/' . $type,[$type => 'value_new', 'id' => $id]);
+        $link = route($controllerName . '/' . $fieldName,[$fieldName => 'value_new', 'id' => $id]);
 
-        $tmpDisplay = config('zvn.template.' . $type);
+        $tmpDisplay = config('zvn.template.' . $fieldName);
         $xhtml = sprintf('<select name="select_change_attr" data-url="%s" class="form-control">', $link);
 
 
@@ -173,5 +173,15 @@ class Template
 
         $xhtml .= '</div>';
         return $xhtml;
+    }
+
+    public static function showDateTimeFrontEnd($dateTime){
+        return date_format(date_create($dateTime), config('zvn.format.short_time'));
+    }
+
+    public static function showContent($content, $length, $prefix = '...'){
+        $prefix = ($length == 0) ? '' : $prefix;
+        $content = str_replace(['<p>', '</p>'], '', $content);
+        return preg_replace('/\s+?(\S+)?$/', '', substr($content, 0, $length)) . $prefix;
     }
 }

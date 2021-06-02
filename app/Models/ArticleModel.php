@@ -23,7 +23,7 @@ class ArticleModel extends AdminModel
         
         if ($option['task'] == "admin-list-items") {
             
-            $query = self::select('a.id', 'a.name', 'a.content', 'a.thumb', 'a.created', 'a.type', 'a.created_by', 'a.modified', 'a.modified_by', 'a.status', 'a.publish_at', 'a.type', 'c.name as category_name')->leftJoin('category as c', 'a.category_id', '=', 'c.id');
+            $query = self::select('a.id', 'a.name', 'a.content', 'a.thumb', 'a.type', 'a.status', 'a.publish_at', 'a.type', 'c.name as category_name')->leftJoin('category as c', 'a.category_id', '=', 'c.id');
             
             if($params['filter']['status'] !== "all"){
                 $query->where('status', '=', $params['filter']['status']);
@@ -46,7 +46,16 @@ class ArticleModel extends AdminModel
         }
 
         if($option['task'] == 'news-list-items') {
-            $query = self::select('id', 'name', 'description', 'link', 'thumb')->where('status', '=', 'active')->limit(5);
+            $query = self::select('a.id', 'a.name', 'a.content', 'a.thumb')->where('status', '=', 'active')->limit(5);
+            $result = $query->get()->toArray();
+        }
+
+        if($option['task'] == 'news-list-article-featured') {
+            $query = self::select('a.id', 'a.name', 'a.content', 'a.created', 'a.thumb', 'a.category_id', 'c.name as category_name', )
+                            ->leftjoin('category as c', 'a.category_id', '=', 'c.id')
+                            ->where('a.status', '=', 'active')
+                            ->where('a.type','featured')
+                            ->take(3);
             $result = $query->get()->toArray();
         }
 
@@ -115,6 +124,10 @@ class ArticleModel extends AdminModel
             $params['modified_by'] = 'TuanDA';
             self::where('id', $params['id'])->update($this->prepareParams($params));
         }
+
+        if($option['task'] == 'change-type') {
+            self::where('id', $params['id'])->update(['type' => $params['currentType']]);
+        }
         
     }
 
@@ -122,7 +135,7 @@ class ArticleModel extends AdminModel
         $result = null;
         
         if($option['task'] == 'get-item'){
-            $result = self::select('id', 'name', 'content', 'thumb', 'status', 'category_id')
+            $result = self::select('a.id', 'a.name', 'a.content', 'a.thumb', 'a.status', 'a.category_id')
                             ->where('id', $params['id'])->first();
         }
 

@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 $prefixAdmin = config("zvn.url.prefix_admin"); // admin
-$prefixNews = config("zvn.url.prefix_news"); // hot-news
+$prefixNews = config("zvn.url.prefix_news"); // hot-new
 
 
 // ============================================ SLIDER ==========================================
@@ -52,7 +52,7 @@ Route::prefix($prefixAdmin)->group(function () {
         Route::post('save',                         [ArticleController::class, 'save'])->name($controllerName . '/save');
         Route::get('delete/{id}',                   [ArticleController::class, 'delete'])->name($controllerName . '/delete')->where('id', '[0-9]+');
         Route::get('change-status-{status}/{id}',   [ArticleController::class, 'status'])->name($controllerName . '/status')->where(['id' => '[0-9]+', 'status' => '[a-z]+']);
-        Route::get('change-type-{type}/{id}', [ArticleController::class, 'type'])->name($controllerName . '/type')->where(['id' => '[0-9]+']);
+        Route::get('change-type-{type}/{id}',       [ArticleController::class, 'type'])->name($controllerName . '/type')->where(['id' => '[0-9]+']);
     });
     
 });

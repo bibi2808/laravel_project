@@ -38,7 +38,7 @@ return [
             'grid'           => ['name' => 'Grid'],
         ],
         'type' => [
-            'feature'        => ['name' => 'Feature'],
+            'featured'        => ['name' => 'Featured'],
             'normal'         => ['name' => 'Normal'],
         ],
         'search' => [

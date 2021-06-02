@@ -11,7 +11,7 @@
                     <div class="main_content">
 
                         <!-- Featured -->
-                        @include('news.block.featured',['itemsFeature' => [] ])
+                        @include('news.block.featured',['items' => $itemsArticle ])
 
                         <!-- Category -->
                         @include('news.pages.home.child_index.category')

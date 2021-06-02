@@ -22,7 +22,7 @@ class CategoryModel extends AdminModel
         $result = null;
         
         if ($option['task'] == "admin-list-items") {
-            $query = self::select('id', 'name', 'created', 'created_by', 'modified', 'modified_by', 'status', 'is_home');
+            $query = self::select('id', 'name', 'created', 'created_by', 'modified', 'modified_by', 'display', 'status', 'is_home');
             
             if($params['filter']['status'] !== "all"){
                 $query->where('status', '=', $params['filter']['status']);
@@ -46,6 +46,11 @@ class CategoryModel extends AdminModel
 
         if($option['task'] == 'news-list-items') {
             $query = self::select('id', 'name')->where('status', '=', 'active')->limit(8);
+            $result = $query->get()->toArray();
+        }
+
+        if($option['task'] == 'news-list-category-is-home') {
+            $query = self::select('id', 'name', 'display')->where('status', '=', 'active')->where('is_home', '=', 'yes')->limit(8);
             $result = $query->get()->toArray();
         }
 
@@ -111,6 +116,11 @@ class CategoryModel extends AdminModel
                 ->update(['is_home' => $isHome]);
         } 
 
+        if($option['task'] == 'change-display') {
+            $display = $params['currentDisplay'];
+            $params['modified_by'] = 'TuanDA';
+            self::where('id', $params['id'])->update(['display' => $display]);
+        }
         
         
     }

@@ -48,6 +48,24 @@ class Template
         return $xhtml;
     }
 
+    public static function showItemDisplay($controllerName, $id, $displayValue)
+    {
+        echo $link = route($controllerName . '/display',['display' => 'value_new', 'id' => $id]);
+        echo '<br/>';
+
+        $tmpDisplay = config('zvn.template.display');
+        $xhtml = sprintf('<select name="select_change_attr" data-url="%s" class="form-control">', $link);
+
+
+       foreach($tmpDisplay as $key => $value) {
+           $xhtmlSelect = '';
+           if ($key == $displayValue) $xhtmlSelect = 'selected="selected"';
+           $xhtml .= sprintf('<option value="%s" %s>%s</option>', $key, $xhtmlSelect, $value['name']);
+       }
+       $xhtml .= '</select>';
+       return $xhtml;
+    }
+
     public static function showButtonFilter($controllerName, $itemsStatusCount, $currentFilterStatus)
     {
         $tmpStatus = config('zvn.template.status');

@@ -90,7 +90,13 @@ class CategoryController extends Controller
 
             return redirect()->route($this->controllerName)->with($this->notify, $notify);
         }
+    }
 
-        echo __METHOD__;
+    public function display(Request $request){
+        $params['currentDisplay'] = $request->display;
+        $params['id'] = $request->id;
+        $this->model->saveItem($params,['task' => 'change-display']);
+
+        return redirect()->route($this->controllerName)->with($this->notify, 'Change Displat is updated!');// flash keyword
     }
 }

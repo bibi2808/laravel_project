@@ -49,12 +49,15 @@ Route::prefix($prefixAdmin)->group(function () {
     Route::prefix($prefix)->group(function () use($controllerName){
 
         Route::get('/',                             [CategoryController::class, 'index'])->name($controllerName);
-        Route::get('form/{id?}',                    [CategoryController::class, 'form'])->name($controllerName . '/form')->where('id', '[0-9]+');
-        Route::post('save',                         [CategoryController::class, 'save'])->name($controllerName . '/save');
-        Route::get('delete/{id}',                   [CategoryController::class, 'delete'])->name($controllerName . '/delete')->where('id', '[0-9]+');
-        Route::get('change-status-{status}/{id}',   [CategoryController::class, 'status'])->name($controllerName . '/status')->where(['id' => '[0-9]+', 'status' => '[a-z]+']);
+        Route::get('form/{id?}',                    [CategoryController::class, 'form'])->name($controllerName .    '/form')->where('id', '[0-9]+');
+        Route::post('save',                         [CategoryController::class, 'save'])->name($controllerName .    '/save');
+        Route::get('delete/{id}',                   [CategoryController::class, 'delete'])->name($controllerName .  '/delete')->where('id', '[0-9]+');
+        Route::get('change-status-{status}/{id}',   [CategoryController::class, 'status'])->name($controllerName .  '/status')->where(['id' => '[0-9]+']);
+        Route::get('change-is-home-{isHome}/{id}',  [CategoryController::class, 'isHome'])->name($controllerName .  '/isHome')->where(['id' => '[0-9]+']);
+        Route::get('change-display-{display}/{id}', [CategoryController::class, 'display'])->name($controllerName . '/display')->where(['id' => '[0-9]+']);
 
-        Route::get('change-is-home-{isHome}/{id}',   [CategoryController::class, 'isHome'])->name($controllerName . '/isHome')->where(['id' => '[0-9]+', 'isHome' => '[a-z]+']);
+
+        //http://proj_news.xyz/admin/category/change-display-grid/8
     });
     
 });

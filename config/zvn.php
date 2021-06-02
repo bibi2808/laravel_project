@@ -30,6 +30,10 @@ return [
             'yes'           => ['name' => 'Show', 'class' => 'btn-primary'],
             'no'            => ['name' => 'Hile', 'class' => 'btn-warning'],
         ],
+        'display' => [
+            'list'           => ['name' => 'List'],
+            'grid'           => ['name' => 'Grid'],
+        ],
         'search' => [
             'all'           => ['name' => 'Search by All'],
             'id'            => ['name' => 'Search by ID'],

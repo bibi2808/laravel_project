@@ -31,7 +31,7 @@ $xhtmlMenuMobile = '';
                     <div class="header_content d-flex flex-row align-items-center justfy-content-start">
                         <div class="logo_container">
                             <a href="#">
-                                <div class="logo"><span>ZEND</span>VN</div>
+                                <div class="logo"><span>GEN</span>Z</div>
                             </a>
                         </div>
                         <div class="header_extra ml-auto d-flex flex-row align-items-center justify-content-start">

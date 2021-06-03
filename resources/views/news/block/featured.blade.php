@@ -1,7 +1,3 @@
-@php
-
-@endphp
-
 <div class="featured">
     <div class="featured_title">
         <div class="container">
@@ -25,17 +21,17 @@
             <!-- Post -->
             <div class="post_item post_v_large d-flex flex-column align-items-start justify-content-start">
                 <div class="post_item post_v_small d-flex flex-column align-items-start justify-content-start">
-                    @include('news.patials.article.image', ['item' => $items[0]])
-                    @include('news.patials.article.content', ['item' => $items[0], 'lengthContent' => 500])
+                    @include('news.patials.article.image', ['item' => $itemsFeatured[0]])
+                    @include('news.patials.article.content', ['item' => $itemsFeatured[0], 'lengthContent' => 500])
                     
                 </div>
             </div>
         </div>
         <div class="col-lg-4">
             @php
-                unset($items[0]);
+                unset($itemsFeatured[0]);
             @endphp
-                @foreach ($items as $item)
+                @foreach ($itemsFeatured as $item)
                     <div>
                         <div class="post_item post_v_small d-flex flex-column align-items-start justify-content-start">
                             @include('news.patials.article.image', ['item' => $item])

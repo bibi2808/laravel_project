@@ -11,7 +11,7 @@
                     <div class="main_content">
 
                         <!-- Featured -->
-                        @include('news.block.featured',['items' => $itemsArticle ])
+                        @include('news.block.featured',['items' => $itemsFeatured ])
 
                         <!-- Category -->
                         @include('news.pages.home.child_index.category')
@@ -22,7 +22,7 @@
                 <div class="col-lg-3">
                     <div class="sidebar">
                         <!-- Latest Posts -->
-                        @include('news.block.latest_posts',['itemsLatestPosts' => [] ])
+                        @include('news.block.latest_posts',['items' => $itemsLatest])
                         
                         <!-- Advertisement -->
                         @include('news.block.advertisement',['itemsAdvertisement' => [] ])

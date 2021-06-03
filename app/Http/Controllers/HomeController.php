@@ -29,14 +29,16 @@ class HomeController extends Controller
         $itemsCategory = $categoryModel->listItems(null, ['task' => 'news-list-category-is-home']);
 
         $articleModel = new ArticleModel();
-        $itemsArticle = $articleModel->listItems(null, ['task' => 'news-list-article-featured']);
+        $itemsFeatured = $articleModel->listItems(null, ['task' => 'news-list-article-featured']);
+        $itemsLatest = $articleModel->listItems(null, ['task' => 'news-list-article-latest']);
 
         
         return view($this->pathViewController . "index", [
             'params'            => $this->params,
             'itemsSlider'       => $itemsSlider,
             'itemsCategory'     => $itemsCategory,
-            'itemsArticle'     => $itemsArticle
+            'itemsFeatured'     => $itemsFeatured,
+            'itemsLatest'       => $itemsLatest
         ]);
     }
 }

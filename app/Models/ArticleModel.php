@@ -13,51 +13,70 @@ class ArticleModel extends AdminModel
     {
         $this->table = 'article as a';
         $this->folderUpload = 'article';
-        $this->fieldSearchAccepted = ['id','name', 'description', 'link'];
+        $this->fieldSearchAccepted = ['id', 'name', 'description', 'link'];
         $this->crudNotAccepted = ['_token', 'thumb_current'];
     }
 
     public function listItems($params = null, $option = null)
     {
         $result = null;
-        
+
         if ($option['task'] == "admin-list-items") {
-            
+
             $query = self::select('a.id', 'a.name', 'a.content', 'a.thumb', 'a.type', 'a.status', 'a.publish_at', 'a.type', 'c.name as category_name')->leftJoin('category as c', 'a.category_id', '=', 'c.id');
-            
-            if($params['filter']['status'] !== "all"){
+
+            if ($params['filter']['status'] !== "all") {
                 $query->where('status', '=', $params['filter']['status']);
             }
 
-            if($params['search']['value'] !== ''){
-                if($params['search']['field'] == 'all'){
-                    $query->where(function($query) use($params) {
-                        foreach($this->fieldSearchAccepted as $column){
+            if ($params['search']['value'] !== '') {
+
+                if ($params['search']['field'] == 'all') {
+
+                    $query->where(function ($query) use ($params) {
+
+                        foreach ($this->fieldSearchAccepted as $column) {
                             $query->orWhere($column, 'LIKE', '%' . $params['search']['value'] . '%');
                         }
                     });
-                } else if(in_array($params['search']['field'], $this->fieldSearchAccepted)){
+                } else if (in_array($params['search']['field'], $this->fieldSearchAccepted)) {
+
                     $query->where($params['search']['field'], 'LIKE', '%' . $params['search']['value'] . '%');
                 }
             }
 
             $result = $query->orderBy('id', 'desc')
-                            ->paginate($params['pagination']['totalPerPage']);
+                ->paginate($params['pagination']['totalPerPage']);
         }
 
-        if($option['task'] == 'news-list-items') {
+        if ($option['task'] == 'news-list-items') {
             $query = self::select('a.id', 'a.name', 'a.content', 'a.thumb')->where('status', '=', 'active')->limit(5);
             $result = $query->get()->toArray();
         }
 
-        if($option['task'] == 'news-list-article-featured') {
-            $query = self::select('a.id', 'a.name', 'a.content', 'a.created', 'a.thumb', 'a.category_id', 'c.name as category_name', )
-                            ->leftjoin('category as c', 'a.category_id', '=', 'c.id')
-                            ->where('a.status', '=', 'active')
-                            ->where('a.type','featured')
-                            ->take(3);
+        if ($option['task'] == 'news-list-article-featured') {
+
+            $query = self::select('a.id', 'a.name', 'a.content', 'a.created', 'a.thumb', 'a.category_id', 'c.name as category_name',)
+                ->leftJoin('category as c', 'a.category_id', '=', 'c.id')
+                ->where('a.status', '=', 'active')
+                ->where('a.type', 'featured')
+                ->take(3);
+
             $result = $query->get()->toArray();
         }
+
+        if ($option['task'] == 'news-list-article-latest') {
+
+            $query = self::select('a.id', 'a.name', 'a.created', 'a.thumb', 'a.category_id', 'c.name as category_name',)
+                ->leftJoin('category as c', 'a.category_id', '=', 'c.id')
+                ->where('a.status', '=', 'active')
+                ->orderBy('id', 'desc')
+                ->take(4);
+
+            $result = $query->get()->toArray();
+        }
+
+
 
         return $result;
     }
@@ -72,50 +91,50 @@ class ArticleModel extends AdminModel
             //                 ->get()->toArray();
 
             $query = self::select('status', DB::raw('COUNT(id) as count, status '))
-                            ->groupBy('status');
+                ->groupBy('status');
 
-            if($params['search']['value'] !== ""){
-                if($params['search']['field'] == "all"){
-                    $query->where(function($query) use($params) {
-                        foreach($this->fieldSearchAccepted as $column) {
-                            $query->orWhere($column, 'LIKE', "%{$params['search']['value']}%" );
+            if ($params['search']['value'] !== "") {
+                if ($params['search']['field'] == "all") {
+                    $query->where(function ($query) use ($params) {
+                        foreach ($this->fieldSearchAccepted as $column) {
+                            $query->orWhere($column, 'LIKE', "%{$params['search']['value']}%");
                         }
                     });
-                } else if(in_array($params['search']['field'], $this->fieldSearchAccepted)) {
-                    $query->where($params['search']['field'],'LIKE', "%{$params['search']['value']}%");
+                } else if (in_array($params['search']['field'], $this->fieldSearchAccepted)) {
+                    $query->where($params['search']['field'], 'LIKE', "%{$params['search']['value']}%");
                 }
             }
 
             $result = $query->get()->toArray();
-            
         }
 
         return $result;
     }
 
-    public function saveItem($params = null, $option = null){
-        if($option['task'] == 'change-status'){
+    public function saveItem($params = null, $option = null)
+    {
+        if ($option['task'] == 'change-status') {
             $status = ($params['currentStatus'] == 'active') ? 'inactive' : 'active';
             self::where('id', $params['id'])
                 ->update(['status' => $status]);
-        } 
-        
-        if($option['task'] == 'add-item') {
+        }
+
+        if ($option['task'] == 'add-item') {
             $params['created'] = date("Y-m-d");
             $params['created_by'] = 'TuanDA';
             $params['thumb'] = $this->uploadThumb($params['thumb']); // upload new Image
-            
+
             $params = array_diff_key($params, array_flip($this->crudNotAccepted));
             self::insert($this->prepareParams($params));
         }
 
-        if($option['task'] == 'edit-item') {
+        if ($option['task'] == 'edit-item') {
 
             // up new image
-            if(!empty($params['thumb'])){
-                
+            if (!empty($params['thumb'])) {
+
                 $this->deleteThumb($params['thumb_current']); // xóa image from folder
-            
+
                 $params['thumb'] = $this->uploadThumb($params['thumb']); // upload new Image
             }
 
@@ -125,30 +144,31 @@ class ArticleModel extends AdminModel
             self::where('id', $params['id'])->update($this->prepareParams($params));
         }
 
-        if($option['task'] == 'change-type') {
+        if ($option['task'] == 'change-type') {
             self::where('id', $params['id'])->update(['type' => $params['currentType']]);
         }
-        
     }
 
-    public function getItem($params, $option){
+    public function getItem($params, $option)
+    {
         $result = null;
-        
-        if($option['task'] == 'get-item'){
+
+        if ($option['task'] == 'get-item') {
             $result = self::select('a.id', 'a.name', 'a.content', 'a.thumb', 'a.status', 'a.category_id')
-                            ->where('id', $params['id'])->first();
+                ->where('id', $params['id'])->first();
         }
 
-        if($option['task'] == 'get-thumb'){
+        if ($option['task'] == 'get-thumb') {
             $result = self::select('id', 'thumb')
-                            ->where('id', $params['id'])->first();
+                ->where('id', $params['id'])->first();
         }
         return $result;
     }
 
-    public function delete($params = null, $option = null) {
-        if($option['task'] == 'delete-item'){
-            $item = $this->getItem($params, ['task'=>'get-thumb']);
+    public function delete($params = null, $option = null)
+    {
+        if ($option['task'] == 'delete-item') {
+            $item = $this->getItem($params, ['task' => 'get-thumb']);
             $this->deleteThumb($item['thumb']); // xóa image from folder
             self::where('id', $params['id'])->delete();
         }

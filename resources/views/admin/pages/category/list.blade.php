@@ -39,7 +39,7 @@
                             </td>
                             <td>{!! $status !!}</td>
                             <td>{!! $isHome !!}</td>
-                            <td>{!! $display !!}</td>
+                            <td width="10%">{!! $display !!}</td>
                             <td>{!! $createdHistory !!}</td>
                             <td>{!! $modifiedHistory !!}</td>
                             <td class="last">{!! $showButton !!}</td>

@@ -22,7 +22,7 @@
             <div class="post_item post_v_large d-flex flex-column align-items-start justify-content-start">
                 <div class="post_item post_v_small d-flex flex-column align-items-start justify-content-start">
                     @include('news.patials.article.image', ['item' => $itemsFeatured[0]])
-                    @include('news.patials.article.content', ['item' => $itemsFeatured[0], 'lengthContent' => 500])
+                    @include('news.patials.article.content', ['item' => $itemsFeatured[0], 'lengthContent' => 500,'showCategory' => true])
                     
                 </div>
             </div>
@@ -35,7 +35,7 @@
                     <div>
                         <div class="post_item post_v_small d-flex flex-column align-items-start justify-content-start">
                             @include('news.patials.article.image', ['item' => $item])
-                            @include('news.patials.article.content', ['item' => $item, 'lengthContent' => 0])
+                            @include('news.patials.article.content', ['item' => $item, 'lengthContent' => 0, 'showCategory' => true])
                         </div>
                     </div>
                 @endforeach

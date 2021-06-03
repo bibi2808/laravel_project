@@ -22,16 +22,19 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        $sliderModel = new SliderModel();
-        $itemsSlider = $sliderModel->listItems(null, ['task' => 'news-list-items']);
+        $sliderModel        = new SliderModel();
+        $categoryModel      = new CategoryModel();
+        $articleModel       = new ArticleModel();
 
-        $categoryModel = new CategoryModel();
-        $itemsCategory = $categoryModel->listItems(null, ['task' => 'news-list-category-is-home']);
+        $itemsSlider        = $sliderModel->listItems(null, ['task' => 'news-list-items']);
+        $itemsCategory      = $categoryModel->listItems(null, ['task' => 'news-list-category-is-home']);
+        $itemsFeatured      = $articleModel->listItems(null, ['task' => 'news-list-article-featured']);
+        $itemsLatest        = $articleModel->listItems(null, ['task' => 'news-list-article-latest']);
 
-        $articleModel = new ArticleModel();
-        $itemsFeatured = $articleModel->listItems(null, ['task' => 'news-list-article-featured']);
-        $itemsLatest = $articleModel->listItems(null, ['task' => 'news-list-article-latest']);
-
+        foreach($itemsCategory as $key => $category){
+            $itemsCategory[$key]['articles'] = $articleModel->listItems(['category_id' =>$category['id']], ['task' => 'news-list-articles-in-category']);
+        }
+        
         
         return view($this->pathViewController . "index", [
             'params'            => $this->params,

@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\SliderController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\SliderController as AdminSliderController;
+use App\Http\Controllers\News\HomeController as NewsHomeController;
+use App\Http\Controllers\News\CategoryController as NewsCategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,11 +31,11 @@ Route::prefix($prefixAdmin)->group(function () {
     
     Route::prefix($prefix)->group(function () use($controllerName){
 
-        Route::get('/',                             [SliderController::class, 'index'])->name($controllerName);
-        Route::get('form/{id?}',                    [SliderController::class, 'form'])->name($controllerName . '/form')->where('id', '[0-9]+');
-        Route::post('save',                         [SliderController::class, 'save'])->name($controllerName . '/save');
-        Route::get('delete/{id}',                   [SliderController::class, 'delete'])->name($controllerName . '/delete')->where('id', '[0-9]+');
-        Route::get('change-status-{status}/{id}',   [SliderController::class, 'status'])->name($controllerName . '/status')->where(['id' => '[0-9]+', 'status' => '[a-z]+']);
+        Route::get('/',                             [AdminSliderController::class, 'index'])->name($controllerName);
+        Route::get('form/{id?}',                    [AdminSliderController::class, 'form'])->name($controllerName . '/form')->where('id', '[0-9]+');
+        Route::post('save',                         [AdminSliderController::class, 'save'])->name($controllerName . '/save');
+        Route::get('delete/{id}',                   [AdminSliderController::class, 'delete'])->name($controllerName . '/delete')->where('id', '[0-9]+');
+        Route::get('change-status-{status}/{id}',   [AdminSliderController::class, 'status'])->name($controllerName . '/status')->where(['id' => '[0-9]+', 'status' => '[a-z]+']);
     });
     
 });
@@ -47,12 +48,12 @@ Route::prefix($prefixAdmin)->group(function () {
     
     Route::prefix($prefix)->group(function () use($controllerName){
 
-        Route::get('/',                             [ArticleController::class, 'index'])->name($controllerName);
-        Route::get('form/{id?}',                    [ArticleController::class, 'form'])->name($controllerName . '/form')->where('id', '[0-9]+');
-        Route::post('save',                         [ArticleController::class, 'save'])->name($controllerName . '/save');
-        Route::get('delete/{id}',                   [ArticleController::class, 'delete'])->name($controllerName . '/delete')->where('id', '[0-9]+');
-        Route::get('change-status-{status}/{id}',   [ArticleController::class, 'status'])->name($controllerName . '/status')->where(['id' => '[0-9]+', 'status' => '[a-z]+']);
-        Route::get('change-type-{type}/{id}',       [ArticleController::class, 'type'])->name($controllerName . '/type')->where(['id' => '[0-9]+']);
+        Route::get('/',                             [AdminArticleController::class, 'index'])->name($controllerName);
+        Route::get('form/{id?}',                    [AdminArticleController::class, 'form'])->name($controllerName . '/form')->where('id', '[0-9]+');
+        Route::post('save',                         [AdminArticleController::class, 'save'])->name($controllerName . '/save');
+        Route::get('delete/{id}',                   [AdminArticleController::class, 'delete'])->name($controllerName . '/delete')->where('id', '[0-9]+');
+        Route::get('change-status-{status}/{id}',   [AdminArticleController::class, 'status'])->name($controllerName . '/status')->where(['id' => '[0-9]+', 'status' => '[a-z]+']);
+        Route::get('change-type-{type}/{id}',       [AdminArticleController::class, 'type'])->name($controllerName . '/type')->where(['id' => '[0-9]+']);
     });
     
 });
@@ -65,43 +66,44 @@ Route::prefix($prefixAdmin)->group(function () {
     
     Route::prefix($prefix)->group(function () use($controllerName){
 
-        Route::get('/',                             [CategoryController::class, 'index'])->name($controllerName);
-        Route::get('form/{id?}',                    [CategoryController::class, 'form'])->name($controllerName .    '/form')->where('id', '[0-9]+');
-        Route::post('save',                         [CategoryController::class, 'save'])->name($controllerName .    '/save');
-        Route::get('delete/{id}',                   [CategoryController::class, 'delete'])->name($controllerName .  '/delete')->where('id', '[0-9]+');
-        Route::get('change-status-{status}/{id}',   [CategoryController::class, 'status'])->name($controllerName .  '/status')->where(['id' => '[0-9]+']);
-        Route::get('change-is-home-{isHome}/{id}',  [CategoryController::class, 'isHome'])->name($controllerName .  '/isHome')->where(['id' => '[0-9]+']);
-        Route::get('change-display-{display}/{id}', [CategoryController::class, 'display'])->name($controllerName . '/display')->where(['id' => '[0-9]+']);
-
-
-        //http://proj_news.xyz/admin/category/change-display-grid/8
+        Route::get('/',                             [AdminCategoryController::class, 'index'])->name($controllerName);
+        Route::get('form/{id?}',                    [AdminCategoryController::class, 'form'])->name($controllerName .    '/form')->where('id', '[0-9]+');
+        Route::post('save',                         [AdminCategoryController::class, 'save'])->name($controllerName .    '/save');
+        Route::get('delete/{id}',                   [AdminCategoryController::class, 'delete'])->name($controllerName .  '/delete')->where('id', '[0-9]+');
+        Route::get('change-status-{status}/{id}',   [AdminCategoryController::class, 'status'])->name($controllerName .  '/status')->where(['id' => '[0-9]+']);
+        Route::get('change-is-home-{isHome}/{id}',  [AdminCategoryController::class, 'isHome'])->name($controllerName .  '/isHome')->where(['id' => '[0-9]+']);
+        Route::get('change-display-{display}/{id}', [AdminCategoryController::class, 'display'])->name($controllerName . '/display')->where(['id' => '[0-9]+']);
     });
     
 });
-
-
-// ============================================ HOME PAGE ==========================================
-Route::prefix($prefixNews)->group(function () {
-
-    $prefix = "";
-    $controllerName = "home";
-    
-    Route::prefix($prefix)->group(function () use($controllerName){
-        Route::get('/', [HomeController::class, 'index'])->name($controllerName);
-    });
-    
-});
-
 
 // ============================================ DASHBOARD ==========================================
 Route::prefix($prefixAdmin)->group(function () {
 
     $prefix = "dashboard";
     $controllerName = "dashboard";
-
     Route::prefix($prefix)->group(function () use($controllerName){
-        Route::get('/', [DashboardController::class, 'index'])->name($controllerName);
+        Route::get('/', [AdminDashboardController::class, 'index'])->name($controllerName);
     });
     
 });
 
+
+Route::prefix($prefixNews)->group(function () {
+    // ============================================ HOME PAGE ==========================================
+    $prefix = "";
+    $controllerName = "home";
+    Route::prefix($prefix)->group(function () use($controllerName){
+        Route::get('/', [NewsHomeController::class, 'index'])->name($controllerName);
+    });
+
+    // ============================================ CATEGORY ==========================================
+    $prefix = "chuyen-muc";
+    $controllerName = "category";
+    Route::prefix($prefix)->group(function () use($controllerName){
+        Route::get('/{category_name}-{category_id}.html', [NewsCategoryController::class, 'index'])->name($controllerName . '/index')
+        ->where('category_name', '[0-9a-zA-Z_-]+')
+        ->where('category_id', '[0-9]+');
+    });
+    
+});

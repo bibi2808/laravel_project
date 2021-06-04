@@ -1,5 +1,6 @@
 @php
     use App\Helpers\Template as Template;
+    use App\Helpers\URL;
 @endphp
 
 <div class="sidebar_latest">
@@ -11,15 +12,15 @@
                 $categoryName = $item['category_name'];
                 $thumb = asset('news/images/article') . '/' . $item['thumb'];
                 $created = Template::showDateTimeFrontEnd($item['created']);
-                $linkCategory = '#';
+                $linkCategory = URL::linkCategory($item['id'], $categoryName);;
                 $linkArticle = '#';
             @endphp
            <!-- Latest Post -->
             <div class="latest_post d-flex flex-row align-items-start justify-content-start">
                 <div><div class="latest_post_image"><img src="{{ $thumb }}" alt="{{ $name }}"></div></div>
                 <div class="latest_post_content">
-                    <div class="post_category_small cat_video"><a href="the-loai/so-hoa-6.html">{{ $categoryName }}</a></div>
-                    <div class="latest_post_title"><a href="bai-viet/asus-ra-mat-zenfone-6-voi-camera-lat-tu-dong-23.html">{{ $name }}</a></div>
+                    <div class="post_category_small cat_video"><a href="{{ $linkCategory }}">{{ $categoryName }}</a></div>
+                    <div class="latest_post_title"><a href="{{ $linkArticle }}">{{ $name }}</a></div>
                     <div class="latest_post_date">{{ $created }}</div>
                 </div>
             </div>

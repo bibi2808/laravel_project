@@ -1,16 +1,15 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ArticleModel as MainModel;
-use App\Http\Requests\ArticleRequest as MainRequest;
-use App\Models\CategoryModel;
+use App\Models\SliderModel as MainModel;
+use App\Http\Requests\SliderRequest as MainRequest;
 
-class ArticleController extends Controller
+class SliderController extends Controller
 {
-    private $pathViewController = "admin.pages.article.";
-    private $controllerName = "article";
+    private $pathViewController = "admin.pages.slider.";
+    private $controllerName = "slider";
     private $notify = 'status';
     private $params = [];
     private $model;
@@ -18,7 +17,7 @@ class ArticleController extends Controller
     public function __construct()
     {
         $this->model = new MainModel(); // khởi tạo đối tượng model
-        $this->params['pagination']['totalPerPage'] = 10; // số items trên 1 page
+        $this->params['pagination']['totalPerPage'] = 5; // số items trên 1 page
         view()->share("controllerName", $this->controllerName); // share controllerName to all of views in SliderClass
     }
 
@@ -61,13 +60,9 @@ class ArticleController extends Controller
             $params['id'] = $request->id;
             $item = $this->model->getItem($params, ['task' => 'get-item']);
         }
-
-        $categoryModel = new CategoryModel();
-        $itemsCategory = $categoryModel->listItems(null, ['task' => 'admin-list-items-in-selecbox']);
-
+        
         return view($this->pathViewController . "form", [
-            'item' => $item,
-            'itemsCategory' => $itemsCategory
+            'item' => $item
         ]);
     }
 
@@ -87,15 +82,7 @@ class ArticleController extends Controller
 
             return redirect()->route($this->controllerName)->with($this->notify, $notify);
         }
-    }
 
-    public function type(Request $request){
-        
-        $params['currentType'] = $request->type;
-        $params['id'] = $request->id;
-        
-        $this->model->saveItem($params,['task' => 'change-type']);
-
-        return redirect()->route($this->controllerName)->with($this->notify, 'Change Displat is updated!');// flash keyword
+        echo __METHOD__;
     }
 }

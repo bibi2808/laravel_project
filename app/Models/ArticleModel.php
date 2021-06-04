@@ -87,7 +87,6 @@ class ArticleModel extends AdminModel
         }
 
 
-
         return $result;
     }
 

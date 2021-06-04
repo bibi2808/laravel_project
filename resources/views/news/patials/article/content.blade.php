@@ -1,8 +1,13 @@
 @php
     use App\Helpers\Template as Template;
+    use App\Helpers\URL;
     $name = $item['name'];
     $thumb = asset('news/images/article') . '/' . $item['thumb'];
-    $linkCategory = "#";
+
+    @if ($showCategory)
+        $linkCategory = URL::linkCategory($item['id'], $item['name']);
+    @endif
+    
     $linkArticle = "#";
     $created = Template::showDateTimeFrontEnd($item['created']);
     $content = Template::showContent($item['content'], $lengthContent);

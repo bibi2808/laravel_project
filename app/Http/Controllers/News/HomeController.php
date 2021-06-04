@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\News;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -16,7 +16,6 @@ class HomeController extends Controller
 
     public function __construct()
     {
-        
         view()->share("controllerName", $this->controllerName); // share controllerName to all of views in SliderClass
     }
 

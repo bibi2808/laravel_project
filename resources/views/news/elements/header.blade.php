@@ -1,5 +1,6 @@
 @php
 use App\Models\CategoryModel as CategoryModel;
+use App\Helpers\URL;
 
 $categoryModel = new CategoryModel();
 $itemsCategory = $categoryModel->listItems(null,['task' => 'news-list-items']);
@@ -7,12 +8,18 @@ $xhtmlMenu = '';
 $xhtmlMenuMobile = '';
 
     if(count($itemsCategory) > 0){
+
         $xhtmlMenu = '<nav class="main_nav"><ul class="main_nav_list d-flex flex-row align-items-center justify-content-start">';
         $xhtmlMenuMobile = '<nav class="menu_nav"><ul class="menu_mm">';
+        $currentIDCategory = Route::input('category_id');
 
             foreach($itemsCategory as $item){
-                $xhtmlMenu.= sprintf('<li><a href="index.html">%s</a></li>', $item['name']);
-                $xhtmlMenuMobile .= sprintf('<li class="menu_mm"><a href="#">%s</a></li>', $item['name']);
+
+                $link = URL::linkCategory($item['id'], $item['name']);
+                $classActive = ($currentIDCategory == $item['id']) ? 'class="active"' : '';
+
+                $xhtmlMenu.= sprintf('<li %s><a href="%s">%s</a></li>', $classActive, $link, $item['name']);
+                $xhtmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s">%s</a></li>', $link, $item['name']);
             }
             
         $xhtmlMenu .= '</ul></nav>';
@@ -30,7 +37,7 @@ $xhtmlMenuMobile = '';
                 <div class="col">
                     <div class="header_content d-flex flex-row align-items-center justfy-content-start">
                         <div class="logo_container">
-                            <a href="#">
+                            <a href="{{ route('home') }}">
                                 <div class="logo"><span>GEN</span>Z</div>
                             </a>
                         </div>

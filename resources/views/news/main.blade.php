@@ -8,8 +8,7 @@
 <body>
     <div class="super_container">
         @include('news.elements.header')
-
-
+        
         @yield('content')
 
         @include('news.elements.footer')

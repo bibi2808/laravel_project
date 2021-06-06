@@ -12,7 +12,6 @@
 
                         <!-- Featured -->
                         @include('news.block.featured',['items' => $itemsFeatured ])
-
                         <!-- Category -->
                         @include('news.pages.home.child_index.category')
                         

@@ -33,7 +33,9 @@ class HomeController extends Controller
         foreach($itemsCategory as $key => $category){
             $itemsCategory[$key]['articles'] = $articleModel->listItems(['category_id' =>$category['id']], ['task' => 'news-list-articles-in-category']);
         }
-        
+        // echo '<pre>';
+        // print_r($itemsFeatured);
+        // echo '<pre/>';
         
         return view($this->pathViewController . "index", [
             'params'            => $this->params,

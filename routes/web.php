@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\SliderController as AdminSliderController;
 use App\Http\Controllers\News\HomeController as NewsHomeController;
 use App\Http\Controllers\News\CategoryController as NewsCategoryController;
+use App\Http\Controllers\News\ArticleController as NewsArticleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -98,12 +99,21 @@ Route::prefix($prefixNews)->group(function () {
     });
 
     // ============================================ CATEGORY ==========================================
-    $prefix = "chuyen-muc";
+    $prefix = "category";
     $controllerName = "category";
     Route::prefix($prefix)->group(function () use($controllerName){
         Route::get('/{category_name}-{category_id}.html', [NewsCategoryController::class, 'index'])->name($controllerName . '/index')
         ->where('category_name', '[0-9a-zA-Z_-]+')
         ->where('category_id', '[0-9]+');
+    });
+
+    // ============================================ POST DETAIL ==========================================
+    $prefix = "post-detail";
+    $controllerName = "article";
+    Route::prefix($prefix)->group(function () use($controllerName){
+        Route::get('/{article_name}-{article_id}.html', [NewsArticleController::class, 'index'])->name($controllerName . '/index')
+        ->where('article_name', '[0-9a-zA-Z_-]+')
+        ->where('article_id', '[0-9]+');
     });
     
 });

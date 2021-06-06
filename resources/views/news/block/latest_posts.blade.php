@@ -12,8 +12,8 @@
                 $categoryName = $item['category_name'];
                 $thumb = asset('news/images/article') . '/' . $item['thumb'];
                 $created = Template::showDateTimeFrontEnd($item['created']);
-                $linkCategory = URL::linkCategory($item['id'], $categoryName);;
-                $linkArticle = '#';
+                $linkCategory = URL::linkCategory($item['category_id'], $categoryName);
+                $linkArticle = URL::linkArticle($item['id'], $name);;
             @endphp
            <!-- Latest Post -->
             <div class="latest_post d-flex flex-row align-items-start justify-content-start">

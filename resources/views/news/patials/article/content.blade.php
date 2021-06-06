@@ -4,11 +4,10 @@
     $name = $item['name'];
     $thumb = asset('news/images/article') . '/' . $item['thumb'];
 
-    @if ($showCategory)
-        $linkCategory = URL::linkCategory($item['id'], $item['name']);
-    @endif
+    if ($showCategory)
+        $linkCategory = URL::linkCategory($item['category_id'], $item['category_name']);
     
-    $linkArticle = "#";
+    $linkArticle = URL::linkArticle($item['id'], $item['name']);
     $created = Template::showDateTimeFrontEnd($item['created']);
     $content = Template::showContent($item['content'], $lengthContent);
 @endphp

@@ -1,5 +1,4 @@
 @php
-{{-- add [ishome, display] fields to form --}}
     use App\Helpers\Form as FormTemplate;
     use App\Helpers\Template as Template;
     $formLabelAttr = config('zvn.template.form_label');

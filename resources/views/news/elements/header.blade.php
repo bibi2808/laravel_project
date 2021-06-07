@@ -21,9 +21,14 @@ $xhtmlMenuMobile = '';
                 $xhtmlMenu.= sprintf('<li %s><a href="%s">%s</a></li>', $classActive, $link, $item['name']);
                 $xhtmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s">%s</a></li>', $link, $item['name']);
             }
-            
-        $xhtmlMenu .= '</ul></nav>';
-        $xhtmlMenuMobile .= '</ul></nav>';
+            if(session('userInfo')){
+                $xhtmlAuth = sprintf('<li><a href="%s">%s</a></li>', route('auth/logout'), 'Logout');
+            }else {
+                $xhtmlAuth = sprintf('<li><a href="%s">%s</a></li>', route('auth/login'), 'Login');
+            }
+        
+        $xhtmlMenu .= $xhtmlAuth . '</ul></nav>';
+        $xhtmlMenuMobile .= $xhtmlAuth . '</ul></nav>';
     }
 
 @endphp

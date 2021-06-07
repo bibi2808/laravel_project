@@ -32,7 +32,7 @@ class CategoryController extends Controller
 
         $itemsLatest        = $articleModel->listItems(null, ['task' => 'news-list-article-latest']);
         $itemsCategory['articles'] = $articleModel->listItems(['category_id' =>$itemsCategory['id']], ['task' => 'news-list-articles-in-category']);
-      
+
         return view($this->pathViewController . "index", [
             'params'            => $this->params,
             'itemsLatest'       => $itemsLatest,

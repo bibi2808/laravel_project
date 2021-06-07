@@ -131,9 +131,6 @@ class UserModel extends AdminModel
             $level = $params['level'];
             self::where('id', $params['id'])->update(['level' => $level]);
         }
-
-        
-        
     }
 
     public function getItem($params, $option){
@@ -147,6 +144,15 @@ class UserModel extends AdminModel
         if($option['task'] == 'get-thumb'){
             $result = self::select('id', 'thumb')
                             ->where('id', $params['id'])->first();
+        }
+
+        if($option['task'] == 'auth-login'){
+            $result = self::select('id', 'username', 'email', 'fullname', 'avatar', 'status', 'level')
+                            ->where('email', $params['email'])
+                            ->where('password', md5($params['password']))
+                            ->where('status', 'active')
+                            ->first();
+            if($result) $result = $result->toArray();
         }
         return $result;
     }

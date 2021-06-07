@@ -1,6 +1,4 @@
 <?php
-
-
 return [
     'url' => [
         'prefix_admin'      => 'admin',
@@ -14,13 +12,16 @@ return [
     ],
     'template' => [
         'form_label' => [
-            'class' => 'control-label col-md-3 col-sm-3 col-xs-12'
+            'class'         => 'control-label col-md-3 col-sm-3 col-xs-12'
+        ],
+        'form_label_edit' => [
+            'class'         => 'control-label col-md-4 col-sm-3 col-xs-12'
         ],
         'form_input' => [
-            'class' => 'form-control col-md-6 col-xs-12'
+            'class'         => 'form-control col-md-6 col-xs-12'
         ],
         'form_ckeditor' => [
-            'class' => 'form-control col-md-6 col-xs-12 ckeditor'
+            'class'         => 'form-control col-md-6 col-xs-12 ckeditor'
         ],
         'status' => [
             'all'           => ['name' => 'ALL', 'class' => 'btn-success'],
@@ -34,12 +35,16 @@ return [
             'no'            => ['name' => 'Hile', 'class' => 'btn-warning'],
         ],
         'display' => [
-            'list'           => ['name' => 'List'],
-            'grid'           => ['name' => 'Grid'],
+            'list'          => ['name' => 'List'],
+            'grid'          => ['name' => 'Grid'],
         ],
         'type' => [
-            'featured'        => ['name' => 'Featured'],
-            'normal'         => ['name' => 'Normal'],
+            'featured'      => ['name' => 'Featured'],
+            'normal'        => ['name' => 'Normal'],
+        ],
+        'level' => [
+            'admin'         => ['name' => 'Admin'],
+            'member'        => ['name' => 'member'],
         ],
         'search' => [
             'all'           => ['name' => 'Search by All'],
@@ -53,23 +58,26 @@ return [
             'content'       => ['name' => 'Search by Content'],
         ],
         'button' => [
-            'edit'      => ['class' => 'btn-success',  'title'  => 'Edit',      'icon' => 'fa-pencil',   'route-name' => '/form'],
-            'delete'    => ['class' => 'btn-danger btn-delete',   'title'  => 'Delete',    'icon' => 'fa-trash',    'route-name' => '/delete'],
-            'info'      => ['class' => 'btn-info',     'title'  => 'Info',      'icon' => 'fa-pencil',   'route-name' => '/delete'],
+            'edit'          => ['class' => 'btn-success',  'title'  => 'Edit',      'icon' => 'fa-pencil',   'route-name' => '/form'],
+            'delete'        => ['class' => 'btn-danger btn-delete',   'title'  => 'Delete',    'icon' => 'fa-trash',    'route-name' => '/delete'],
+            'info'          => ['class' => 'btn-info',     'title'  => 'Info',      'icon' => 'fa-pencil',   'route-name' => '/delete'],
+            'user'          => ['class' => 'btn-info',     'title'  => 'User',      'icon' => 'fa-pencil',   'route-name' => '/user'],
         ]
     ],
     'config' => [
         'search' => [
-            'slider' => ['all', 'id', 'name', 'description', 'link'],
-            'category' => ['all', 'id', 'name'],
-            'article' => ['all', 'id', 'name'],
-            'default' => ['all', 'id']
+            'slider'        => ['all', 'id', 'name', 'description', 'link'],
+            'category'      => ['all', 'id', 'name'],
+            'article'       => ['all', 'id', 'name'],
+            'default'       => ['all', 'id'],
+            'user'          => ['all', 'username', 'email', 'fullname']
         ],
         'button' => [
             'default'       => ['edit', 'delete'],
             'slider'        => ['edit', 'delete'],
             'category'      => ['edit', 'delete'],
-            'article'       => ['edit', 'delete']
+            'article'       => ['edit', 'delete'],
+            'user'       => ['edit']
         ]
     ]
 ];

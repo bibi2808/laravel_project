@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
-use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
-use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-use App\Http\Controllers\Admin\SliderController as AdminSliderController;
-use App\Http\Controllers\News\HomeController as NewsHomeController;
-use App\Http\Controllers\News\CategoryController as NewsCategoryController;
-use App\Http\Controllers\News\ArticleController as NewsArticleController;
+use App\Http\Controllers\Admin\ArticleController    as AdminArticleController;
+use App\Http\Controllers\Admin\CategoryController   as AdminCategoryController;
+use App\Http\Controllers\Admin\DashboardController  as AdminDashboardController;
+use App\Http\Controllers\Admin\SliderController     as AdminSliderController;
+use App\Http\Controllers\Admin\UserController       as AdminUserController;
+use App\Http\Controllers\News\HomeController        as NewsHomeController;
+use App\Http\Controllers\News\CategoryController    as NewsCategoryController;
+use App\Http\Controllers\News\ArticleController     as NewsArticleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,13 +24,12 @@ use Illuminate\Support\Facades\Route;
 $prefixAdmin = config("zvn.url.prefix_admin"); // admin
 $prefixNews = config("zvn.url.prefix_news"); // hot-new
 
-
-// ============================================ SLIDER ==========================================
+// ============================================ ADMIN ==========================================
 Route::prefix($prefixAdmin)->group(function () {
 
-    $prefix = "slider";
+    // ============================================ SLIDER ==========================================
+    $prefix         = "slider";
     $controllerName = "slider";
-    
     Route::prefix($prefix)->group(function () use($controllerName){
 
         Route::get('/',                             [AdminSliderController::class, 'index'])->name($controllerName);
@@ -38,15 +38,10 @@ Route::prefix($prefixAdmin)->group(function () {
         Route::get('delete/{id}',                   [AdminSliderController::class, 'delete'])->name($controllerName . '/delete')->where('id', '[0-9]+');
         Route::get('change-status-{status}/{id}',   [AdminSliderController::class, 'status'])->name($controllerName . '/status')->where(['id' => '[0-9]+', 'status' => '[a-z]+']);
     });
-    
-});
 
-// ============================================ ARTICLE ==========================================
-Route::prefix($prefixAdmin)->group(function () {
-
-    $prefix = "article";
+    // ============================================ ARTICLE ==========================================
+    $prefix         = "article";
     $controllerName = "article";
-    
     Route::prefix($prefix)->group(function () use($controllerName){
 
         Route::get('/',                             [AdminArticleController::class, 'index'])->name($controllerName);
@@ -57,14 +52,9 @@ Route::prefix($prefixAdmin)->group(function () {
         Route::get('change-type-{type}/{id}',       [AdminArticleController::class, 'type'])->name($controllerName . '/type')->where(['id' => '[0-9]+']);
     });
     
-});
-
-// ============================================ CATEGORY ==========================================
-Route::prefix($prefixAdmin)->group(function () {
-
-    $prefix = "category";
+    // ============================================ CATEGORY ==========================================
+    $prefix         = "category";
     $controllerName = "category";
-    
     Route::prefix($prefix)->group(function () use($controllerName){
 
         Route::get('/',                             [AdminCategoryController::class, 'index'])->name($controllerName);
@@ -75,20 +65,29 @@ Route::prefix($prefixAdmin)->group(function () {
         Route::get('change-is-home-{isHome}/{id}',  [AdminCategoryController::class, 'isHome'])->name($controllerName .  '/isHome')->where(['id' => '[0-9]+']);
         Route::get('change-display-{display}/{id}', [AdminCategoryController::class, 'display'])->name($controllerName . '/display')->where(['id' => '[0-9]+']);
     });
-    
-});
 
-// ============================================ DASHBOARD ==========================================
-Route::prefix($prefixAdmin)->group(function () {
+    // ============================================ USER ==========================================
+    $prefix         = "user";
+    $controllerName = "user";
+    Route::prefix($prefix)->group(function () use($controllerName){
 
+        Route::get('/',                             [AdminUserController::class, 'index'])->name($controllerName);
+        Route::get('form/{id?}',                    [AdminUserController::class, 'form'])->name($controllerName .    '/form')->where('id', '[0-9]+');
+        Route::post('save',                         [AdminUserController::class, 'save'])->name($controllerName .    '/save');
+        Route::get('delete/{id}',                   [AdminUserController::class, 'delete'])->name($controllerName .  '/delete')->where('id', '[0-9]+');
+        Route::get('change-status-{status}/{id}',   [AdminUserController::class, 'status'])->name($controllerName .  '/status')->where(['id' => '[0-9]+']);
+        Route::get('change-level-{level}/{id}',     [AdminUserController::class, 'level'])->name($controllerName .  '/level');
+        Route::post('change-password',              [AdminUserController::class, 'changePassword'])->name($controllerName .  '/change-password');
+        Route::post('change-level',                 [AdminUserController::class, 'changeLevel'])->name($controllerName .  '/change-level');
+    });
+
+    // ============================================ DASHBOARD ==========================================
     $prefix = "dashboard";
     $controllerName = "dashboard";
     Route::prefix($prefix)->group(function () use($controllerName){
         Route::get('/', [AdminDashboardController::class, 'index'])->name($controllerName);
     });
-    
 });
-
 
 Route::prefix($prefixNews)->group(function () {
     // ============================================ HOME PAGE ==========================================

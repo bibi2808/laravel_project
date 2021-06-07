@@ -41,7 +41,7 @@
                 
                 {!! Form::open([
                     'method'            => 'POST',
-                    'action'            =>  [ucfirst($controllerName) . "Controller@save"],// Noted !!!
+                    'action'            => 'Admin\\' . ucfirst($controllerName) . 'Controller@save',
                     'accept-charset'    => "UTF-8",
                     'enctype'           => "multipart/form-data",
                     'class'             => "form-horizontal form-label-left",

@@ -35,7 +35,7 @@
                             <td class="">{{ $key }}</td>
                             <td width="40%">
                                 <p><strong>Name: </strong>{{ $name }}</p>
-                                <p><strong>Description: </strong>{{ $description }}</p>
+                                <p><strong>Description: </strong>{!! $description !!}</p>
                                 <p><strong>Link: </strong><a href="{{ $link }}">{{ $link }}</a></p>
                                 <p>{!! $thumb !!}</p>
                             </td>

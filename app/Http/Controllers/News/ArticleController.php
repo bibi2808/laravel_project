@@ -23,20 +23,19 @@ class ArticleController extends Controller
         $articleModel           = new ArticleModel();
         
         $itemsArticle           = $articleModel->getItem($params, ['task' => 'news-get-item']);
-        
-        if(empty($itemsArticle)) 
-            return redirect()->route('home');
+        if(empty($itemsArticle)) return redirect()->route('home');
         
         $itemsLatest            = $articleModel->listItems(null, ['task' => 'news-list-article-latest']);
+        $params['category_id'] = $itemsArticle['category_id'];
 
-        $itemsRelated           = $articleModel->listItems($itemsArticle['category_id'], ['task' => 'news-list-article-related']);
-
+        $itemsArticle['related_article']          = $articleModel->listItems($params, ['task' => 'news-list-article-related']);
+       
         
         return view($this->pathViewController . "index", [
             'params'            => $this->params,
             'itemsArticle'      => $itemsArticle,
             'itemsLatest'       => $itemsLatest,
-            'itemsRelated'      => $itemsRelated
+            // 'itemsRelated'      => $itemsRelated
         ]);
     }
 }

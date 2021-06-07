@@ -1,4 +1,4 @@
-@foreach ($item['articles'] as $article)
+@foreach ($item['related_article'] as $article)
     <div class="posts">
         <div class="post_item post_h_large">
             <div class="row">

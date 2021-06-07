@@ -88,16 +88,14 @@ class ArticleModel extends AdminModel
 
         if ($option['task'] == 'news-list-article-related') {
             
-            $query = self::select('a.id', 'a.content', 'a.name', 'a.created', 'a.thumb', 'a.category_id', 'c.name as category_name',)
-                ->leftJoin('category as c', 'a.category_id', '=', 'c.id')
-                ->where('a.status', '=', 'active')
-                ->where('category_id', '=', $params)
-                ->orderBy('id', 'desc')
+            $query = self::select('id', 'name', 'created', 'thumb', 'content')
+                ->where('category_id', '=', $params['category_id'])
+                ->where('status', '=',  'active')
+                ->where('id', '!=', $params['article_id'])
                 ->take(4);
 
             $result = $query->get()->toArray();
-        }
-        
+        }       
 
 
         return $result;
@@ -186,7 +184,7 @@ class ArticleModel extends AdminModel
         }
 
         if ($option['task'] == 'news-get-item') {
-            $result = self::select('a.id', 'a.name', 'a.content', 'a.category_id', 'a.thumb', 'a.created', 'c.name as category_name')
+            $result = self::select('a.id', 'a.name', 'a.content', 'a.category_id', 'a.thumb', 'a.created', 'c.name as category_name', 'c.display')
                     ->leftJoin('category as c', 'a.category_id', '=', 'c.id')
                     ->where('a.id', '=', $params['article_id'])
                     ->where('a.status', '=', 'active')

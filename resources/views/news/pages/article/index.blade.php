@@ -12,7 +12,7 @@
                         <div class="single_post">
                             
                             @include('news.pages.article.child_index.article', ['item' => $itemsArticle])
-                            @include('news.pages.article.child_index.related', ['items' => $itemsRelated, 'lengthContent' => 200])
+                            @include('news.pages.article.child_index.related', ['item' => $itemsArticle])
                         </div>
                     </div>
                     <!-- Sidebar -->

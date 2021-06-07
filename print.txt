@@ -1,3 +1,4 @@
  echo '<pre>';
         print_r($tmpStatus);
         echo '<pre/>';
+        die();

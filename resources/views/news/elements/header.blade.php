@@ -22,10 +22,16 @@ $xhtmlMenuMobile = '';
                 $xhtmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s">%s</a></li>', $link, $item['name']);
             }
             if(session('userInfo')){
-                $xhtmlAuth = sprintf('<li><a href="%s">%s</a></li>', route('auth/logout'), 'Logout');
+                $xhtmlAuth = sprintf('<li><a href="%s">%s</a></li>',route('user'), session('userInfo')['username']);
+                if(session('userInfo')['level'] == 'admin'){
+                    $xhtmlAuth .= sprintf('<li><a href="%s">%s</a></li>',route('user'), 'Admin');
+                }
+                $xhtmlAuth .= sprintf('<li><a href="%s">%s</a></li>',route('auth/logout'), 'Logout');
             }else {
-                $xhtmlAuth = sprintf('<li><a href="%s">%s</a></li>', route('auth/login'), 'Login');
+                $xhtmlAuth = sprintf('<li><a href="%s">%s</a></li><li><a href="%s">%s</a></li>', route('auth/login'), 'Login', route('auth/register'), 'Register');
+                
             }
+            
         
         $xhtmlMenu .= $xhtmlAuth . '</ul></nav>';
         $xhtmlMenuMobile .= $xhtmlAuth . '</ul></nav>';

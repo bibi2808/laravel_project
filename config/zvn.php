@@ -4,7 +4,8 @@ return [
         'prefix_admin'      => 'admin',
         'prefix_dashboard'  => 'dashboard',
         'prefix_dashboard'  => 'category',
-        'prefix_news'       => 'hot-new',
+        'prefix_news'       => '',
+        // 'prefix_news'       => 'hot-new',
     ],
     'format' => [
         'short_time'        => 'd/m/Y',

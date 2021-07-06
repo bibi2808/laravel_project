@@ -30,7 +30,7 @@
 				<button type="submit" class="btn btn-primary btn-block">Login</button>
 			</div>
 			<div class="margin-top20 text-center">
-				Don't have an account? <a href="register.html">Create One</a>
+			Don't have an account? <a href='{{ route("$controllerName/register") }}'>Create One</a>
 			</div>
 			{!! Form::close() !!}
 		</div>

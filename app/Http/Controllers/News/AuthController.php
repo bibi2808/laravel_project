@@ -5,7 +5,8 @@ namespace App\Http\Controllers\News;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\UserModel;
-use App\Http\Requests\AuthLoginRequest as MainRequest;
+use App\Http\Requests\AuthLoginRequest as LoginRequest;
+use App\Http\Requests\AuthRegisterRequest as RegisterRequest;
 
 class AuthController extends Controller
 {
@@ -23,7 +24,7 @@ class AuthController extends Controller
         return view($this->pathViewController . 'login');
     }
 
-    public function postLogin(MainRequest $request) {
+    public function postLogin(LoginRequest $request) {
         if($request->method() == 'POST') {
             $params = $request->all();
             $userModel = new UserModel();
@@ -43,6 +44,24 @@ class AuthController extends Controller
             return redirect()->route('home');
         }
         return redirect()->route('home');
+    }
+
+    public function register(Request $request){
+        return view($this->pathViewController . 'register');
+    }
+
+    public function postRegister(RegisterRequest $request){
+        if($request->method() == "POST"){
+            $params = $request->all();
+            $userModel = new UserModel();
+            $userModel->register($params);
+            // after register
+
+            // login
+            
+            return redirect()->route($this->controllerName . '/login')->with('news_notify', 'Register successfully!');
+        }
+        
     }
 
 }

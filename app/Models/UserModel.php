@@ -154,6 +154,14 @@ class UserModel extends AdminModel
                             ->first();
             if($result) $result = $result->toArray();
         }
+        if($option['task'] == 'check-register'){
+            $result = self::select('email')
+                            ->where('email', $params['email'])
+                            ->first();
+            
+            if($result) $result = $result->toArray();
+        }
+
         return $result;
     }
 
@@ -163,5 +171,16 @@ class UserModel extends AdminModel
             $this->deleteThumb($item['thumb']); // xóa image from folder
             self::where('id', $params['id'])->delete();
         }
+    }
+
+    public function register($params = null, $option = null) {
+        $params['created'] = date("Y-m-d");
+        $params['created_by'] = 'TuanDA';
+        $params['password'] = md5($params['password']);
+        $params['level'] = 'member';
+        $params['status'] = 'inactive';
+
+        $params = array_diff_key($params, array_flip($this->crudNotAccepted));
+        self::insert($this->prepareParams($params));
     }
 }

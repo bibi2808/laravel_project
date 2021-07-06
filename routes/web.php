@@ -28,7 +28,6 @@ $prefixNews = config("zvn.url.prefix_news"); // hot-new
 
 // ============================================ ADMIN ==========================================
 Route::prefix($prefixAdmin)->group(function () {
-
     Route::middleware('check.permission')->group(static function (){
         // ============================================ SLIDER ==========================================
         $prefix         = "slider";
@@ -124,10 +123,11 @@ Route::prefix($prefixNews)->group(function () {
     $prefix = "";
     $controllerName = "auth";
     Route::prefix($prefix)->group(function () use($controllerName){
-        Route::get('/login',        [AuthController::class, 'login'])->name($controllerName . '/login')->middleware('check.login');
-        Route::post('/postLogin',   [AuthController::class, 'postLogin'])->name($controllerName . '/postLogin');
-
-        Route::get('/logout',       [AuthController::class, 'logout'])->name($controllerName . '/logout');
+        Route::get('/login',            [AuthController::class, 'login'])->name($controllerName . '/login')->middleware('check.login');
+        Route::post('/postLogin',       [AuthController::class, 'postLogin'])->name($controllerName . '/postLogin');
+        Route::get('/logout',           [AuthController::class, 'logout'])->name($controllerName . '/logout');
+        Route::get('/register',         [AuthController::class, 'register'])->name($controllerName . '/register');
+        Route::post('/postRegister',     [AuthController::class, 'postRegister'])->name($controllerName . '/postRegister');
     });
 
     // ============================================ NOTIFY ==========================================
